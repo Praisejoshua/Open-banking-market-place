@@ -1,0 +1,170 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+
+{% block title %}Admin Dashboard - Open Banking Marketplace{% endblock %}
+{% block page_title %}System Overview{% endblock %}
+
+{% block content %}
+<!-- Stats Row -->
+<div class="dashboard-grid">
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon blue"><i class="fas fa-users"></i></div>
+        </div>
+        <div class="stat-value">{{ total_users }}</div>
+        <div class="stat-label">Total Users</div>
+        <div class="stat-change positive"><i class="fas fa-arrow-up"></i> +{{ new_users_today }} today</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon green"><i class="fas fa-file-alt"></i></div>
+        </div>
+        <div class="stat-value">{{ total_applications }}</div>
+        <div class="stat-label">Applications</div>
+        <div class="stat-change {% if pending_applications > 0 %}warning{% else %}positive{% endif %}">
+            {{ pending_applications }} pending
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon purple"><i class="fas fa-hand-holding-usd"></i></div>
+        </div>
+        <div class="stat-value">N{{ total_disbursed|floatformat:0|intcomma }}</div>
+        <div class="stat-label">Total Disbursed</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon orange"><i class="fas fa-box-open"></i></div>
+        </div>
+        <div class="stat-value">{{ active_products }}</div>
+        <div class="stat-label">Active Products</div>
+    </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+    <!-- Monthly Trend -->
+    <div class="dashboard-section">
+        <div class="section-header-flex">
+            <h2><i class="fas fa-chart-line"></i> Application Trends</h2>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <canvas id="adminTrendChart" width="600" height="280"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Distribution -->
+    <div class="dashboard-section">
+        <div class="section-header-flex">
+            <h2><i class="fas fa-chart-pie"></i> Status Distribution</h2>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <canvas id="statusChart" width="300" height="280"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Applications -->
+<div class="dashboard-section">
+    <div class="section-header-flex">
+        <h2><i class="fas fa-clock"></i> Recent Applications</h2>
+        <a href="{% url 'admin:index' %}" class="btn btn-sm btn-outline">View in Admin</a>
+    </div>
+    <div class="card">
+        <div class="card-body" style="padding: 0;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Borrower</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for app in recent_applications %}
+                    <tr>
+                        <td style="font-family: monospace; font-size: 0.8125rem;">#{{ app.id|truncatechars:8 }}</td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="profile-avatar" style="width: 28px; height: 28px; font-size: 0.5rem;">
+                                    {{ app.borrower.first_name|first }}{{ app.borrower.last_name|first }}
+                                </div>
+                                {{ app.borrower.get_full_name }}
+                            </div>
+                        </td>
+                        <td>{{ app.get_loan_type_display }}</td>
+                        <td style="font-weight: 600;">N{{ app.amount_requested|floatformat:0|intcomma }}</td>
+                        <td>
+                            <span class="badge badge-{% if app.status == 'approved' %}success{% elif app.status == 'rejected' %}danger{% elif app.status == 'submitted' %}info{% else %}warning{% endif %}">
+                                {{ app.get_status_display }}
+                            </span>
+                        </td>
+                        <td style="font-size: 0.8125rem; color: var(--gray-500);">{{ app.created_at|date:"M d, Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Trend Chart
+    const trendCtx = document.getElementById('adminTrendChart').getContext('2d');
+    new Chart(trendCtx, {
+        type: 'bar',
+        data: {
+            labels: {{ months|safe }},
+            datasets: [{
+                label: 'Applications',
+                data: {{ app_counts }},
+                backgroundColor: 'rgba(37, 99, 235, 0.8)',
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+
+    // Status Pie Chart
+    const statusCtx = document.getElementById('statusChart').getContext('2d');
+    const statusData = {{ status_distribution|safe }};
+    const colors = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#14b8a6', '#ec4899', '#6b7280'];
+    
+    new Chart(statusCtx, {
+        type: 'doughnut',
+        data: {
+            labels: statusData.map(s => s.status.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())),
+            datasets: [{
+                data: statusData.map(s => s.count),
+                backgroundColor: colors.slice(0, statusData.length)
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { boxWidth: 12, font: { size: 11 } }
+                }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

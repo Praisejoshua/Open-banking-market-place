@@ -1,0 +1,91 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+{% block title %}{{ account.bank_name }} - Account Details{% endblock %}
+{% block page_title %}{{ account.bank_name }} | {{ account.masked_account_number }}{% endblock %}
+
+{% block content %}
+<!-- Summary Cards -->
+<div class="dashboard-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+    <div class="stat-card">
+        <div class="stat-header"><div class="stat-icon blue"><i class="fas fa-wallet"></i></div></div>
+        <div class="stat-value">N{{ account.balance|floatformat:0|intcomma }}</div>
+        <div class="stat-label">Current Balance</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header"><div class="stat-icon green"><i class="fas fa-arrow-down"></i></div></div>
+        <div class="stat-value">N{{ total_income|floatformat:0|intcomma }}</div>
+        <div class="stat-label">Income (30 days)</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header"><div class="stat-icon red"><i class="fas fa-arrow-up"></i></div></div>
+        <div class="stat-value">N{{ total_expenses|floatformat:0|intcomma }}</div>
+        <div class="stat-label">Expenses (30 days)</div>
+    </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+    <!-- Transactions -->
+    <div class="card">
+        <div class="card-header">
+            <h3><i class="fas fa-exchange-alt"></i> Recent Transactions</h3>
+            <span class="badge badge-secondary">{{ transactions|length }} transactions</span>
+        </div>
+        <div class="card-body" style="padding: 0;">
+            <table class="data-table">
+                <thead>
+                    <tr><th>Date</th><th>Description</th><th>Category</th><th>Type</th><th>Amount</th></tr>
+                </thead>
+                <tbody>
+                    {% for txn in transactions %}
+                    <tr>
+                        <td style="font-size: 0.8125rem; white-space: nowrap;">{{ txn.transaction_date|date:"M d, Y" }}</td>
+                        <td>{{ txn.description|truncatechars:40 }}</td>
+                        <td><span class="badge badge-secondary" style="font-size: 0.6875rem;">{{ txn.get_category_display }}</span></td>
+                        <td><span class="badge badge-{% if txn.transaction_type == 'credit' %}success{% else %}danger{% endif %}" style="font-size: 0.6875rem;">{{ txn.get_transaction_type_display }}</span></td>
+                        <td style="font-weight: 600; color: {% if txn.transaction_type == 'credit' %}var(--accent-green){% else %}var(--accent-red){% endif %};">
+                            {% if txn.transaction_type == 'credit' %}+{% else %}-{% endif %}N{{ txn.amount|floatformat:0|intcomma }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Category Breakdown -->
+    <div class="card">
+        <div class="card-header">
+            <h3><i class="fas fa-chart-pie"></i> Spending Breakdown</h3>
+        </div>
+        <div class="card-body">
+            <canvas id="categoryChart" width="250" height="250"></canvas>
+            <div style="margin-top: 16px;">
+                {% for cat in category_breakdown %}
+                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--gray-100); font-size: 0.875rem;">
+                    <span>{{ cat.category|title }}</span>
+                    <span style="font-weight: 600;">N{{ cat.total|floatformat:0|intcomma }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('categoryChart').getContext('2d');
+    const cats = {{ category_breakdown|safe }};
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: cats.map(c => c.category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())),
+            datasets: [{ data: cats.map(c => c.total), backgroundColor: ['#2563eb', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#14b8a6', '#ec4899'] }]
+        },
+        options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+});
+</script>
+{% endblock %}

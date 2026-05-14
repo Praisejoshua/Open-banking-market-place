@@ -1,0 +1,203 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+
+{% block title %}Application #{{ application.id|truncatechars:8 }} - Open Banking Marketplace{% endblock %}
+{% block page_title %}Application Details{% endblock %}
+
+{% block content %}
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+    <!-- Main Details -->
+    <div>
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+                <div>
+                    <span style="font-family: monospace; color: var(--gray-500); font-size: 0.875rem;">Application #{{ application.id|truncatechars:12 }}</span>
+                    <h3 style="margin-top: 4px;">{{ application.get_loan_type_display }} Loan Application</h3>
+                </div>
+                <span class="badge badge-{% if application.status == 'approved' or application.status == 'disbursed' or application.status == 'offer_accepted' %}success{% elif application.status == 'rejected' %}danger{% elif application.status == 'submitted' %}info{% else %}warning{% endif %}" style="font-size: 0.875rem;">
+                    {{ application.get_status_display }}
+                </span>
+            </div>
+            <div class="card-body">
+                <!-- Progress -->
+                <div class="progress-steps" style="margin-bottom: 32px;">
+                    <div class="step {% if application.status != 'draft' %}completed{% endif %}">
+                        <div class="step-indicator"><i class="fas fa-check"></i></div>
+                        <span class="step-label">Submitted</span>
+                    </div>
+                    <div class="step {% if application.credit_score %}completed{% elif application.status != 'draft' %}active{% endif %}">
+                        <div class="step-indicator">{% if application.credit_score %}<i class="fas fa-check"></i>{% else %}2{% endif %}</div>
+                        <span class="step-label">Credit Check</span>
+                    </div>
+                    <div class="step {% if application.status == 'approved' or application.status == 'offer_accepted' or application.status == 'disbursed' %}completed{% elif application.credit_score %}active{% endif %}">
+                        <div class="step-indicator">{% if application.status == 'approved' or application.status == 'offer_accepted' or application.status == 'disbursed' %}<i class="fas fa-check"></i>{% else %}3{% endif %}</div>
+                        <span class="step-label">Approved</span>
+                    </div>
+                    <div class="step {% if application.status == 'disbursed' %}completed{% elif application.status == 'offer_accepted' %}active{% endif %}">
+                        <div class="step-indicator">{% if application.status == 'disbursed' %}<i class="fas fa-check"></i>{% else %}4{% endif %}</div>
+                        <span class="step-label">Disbursed</span>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                    <div>
+                        <h4 style="margin-bottom: 16px; color: var(--gray-800);">Application Details</h4>
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.9375rem;">
+                                <span style="color: var(--gray-500);">Amount Requested</span>
+                                <span style="font-weight: 600;">N{{ application.amount_requested|floatformat:0|intcomma }}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.9375rem;">
+                                <span style="color: var(--gray-500);">Duration</span>
+                                <span style="font-weight: 600;">{{ application.duration_months }} months</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.9375rem;">
+                                <span style="color: var(--gray-500);">Monthly Income</span>
+                                <span style="font-weight: 600;">N{{ application.monthly_income|floatformat:0|intcomma }}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.9375rem;">
+                                <span style="color: var(--gray-500);">Monthly Expenses</span>
+                                <span style="font-weight: 600;">N{{ application.monthly_expenses|floatformat:0|intcomma }}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.9375rem;">
+                                <span style="color: var(--gray-500);">Existing Debt</span>
+                                <span style="font-weight: 600;">N{{ application.existing_debt|floatformat:0|intcomma }}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.9375rem;">
+                                <span style="color: var(--gray-500);">Debt-to-Income Ratio</span>
+                                <span class="badge badge-{% if application.debt_to_income_ratio < 30 %}success{% elif application.debt_to_income_ratio < 50 %}warning{% else %}danger{% endif %}">{{ application.debt_to_income_ratio|floatformat:1 }}%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 style="margin-bottom: 16px; color: var(--gray-800);">Loan Purpose</h4>
+                        <p style="color: var(--gray-600); line-height: 1.6; font-size: 0.9375rem;">{{ application.purpose }}</p>
+                        
+                        {% if application.status_notes %}
+                        <h4 style="margin: 20px 0 8px; color: var(--gray-800);">Status Notes</h4>
+                        <div class="alert alert-info" style="margin: 0;">
+                            <i class="fas fa-info-circle"></i> {{ application.status_notes }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                {% if application.amount_approved %}
+                <div style="margin-top: 24px; padding: 20px; background: var(--accent-green-light); border-radius: var(--radius); border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: #047857; margin-bottom: 12px;"><i class="fas fa-check-circle"></i> Approved Terms</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                        <div>
+                            <span style="font-size: 0.8125rem; color: #047857;">Approved Amount</span>
+                            <span style="display: block; font-size: 1.25rem; font-weight: 700; color: #047857;">N{{ application.amount_approved|floatformat:0|intcomma }}</span>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.8125rem; color: #047857;">Interest Rate</span>
+                            <span style="display: block; font-size: 1.25rem; font-weight: 700; color: #047857;">{{ application.interest_rate_approved }}%</span>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.8125rem; color: #047857;">Monthly Payment</span>
+                            <span style="display: block; font-size: 1.25rem; font-weight: 700; color: #047857;">N{{ application.monthly_payment|floatformat:0|intcomma }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Repayment Schedule -->
+        {% if repayments %}
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-calendar-alt"></i> Repayment Schedule</h3>
+            </div>
+            <div class="card-body" style="padding: 0;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Due Date</th>
+                            <th>Amount Due</th>
+                            <th>Amount Paid</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for payment in repayments %}
+                        <tr>
+                            <td>{{ payment.installment_number }}</td>
+                            <td>{{ payment.due_date|date:"M d, Y" }}</td>
+                            <td style="font-weight: 600;">N{{ payment.amount_due|floatformat:0|intcomma }}</td>
+                            <td>N{{ payment.amount_paid|floatformat:0|intcomma }}</td>
+                            <td>
+                                <span class="badge badge-{% if payment.status == 'paid' %}success{% elif payment.status == 'late' %}warning{% elif payment.status == 'missed' %}danger{% else %}secondary{% endif %}">{{ payment.get_status_display }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <!-- Sidebar -->
+    <div>
+        <!-- Credit Score -->
+        {% if credit_score %}
+        <div class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <h3><i class="fas fa-chart-line"></i> Credit Assessment</h3>
+            </div>
+            <div class="card-body" style="text-align: center;">
+                <div class="score-circle" style="width: 160px; height: 160px; margin: 0 auto;">
+                    <svg class="score-ring" width="160" height="160" viewBox="0 0 200 200">
+                        <circle class="score-ring-bg" cx="100" cy="100" r="80"/>
+                        <circle class="score-ring-fill" cx="100" cy="100" r="80"
+                            stroke="{{ credit_score.score_color }}"
+                            stroke-dasharray="502"
+                            stroke-dashoffset="{{ credit_score.score_offset }}"/>
+                    </svg>
+                    <div class="score-value">
+                        <span class="score-number" style="font-size: 1.75rem;">{{ credit_score.total_score }}</span>
+                        <span class="score-label" style="font-size: 0.75rem;">{{ credit_score.get_risk_category_display }}</span>
+                    </div>
+                </div>
+                <p style="font-size: 0.8125rem; color: var(--gray-500); margin-top: 12px;">
+                    Risk Level: <strong style="color: {{ credit_score.score_color }};">{{ credit_score.get_risk_level_display }}</strong><br>
+                    Default Probability: {{ credit_score.default_probability }}%
+                </p>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Pending Offers -->
+        {% if offers %}
+        <div class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <h3><i class="fas fa-gift"></i> Loan Offers</h3>
+            </div>
+            <div class="card-body" style="padding: 16px;">
+                {% for offer in offers %}
+                <div style="padding: 16px; background: var(--gray-50); border-radius: var(--radius); margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="font-weight: 600;">{{ offer.lender.company_name|default:offer.lender.get_full_name }}</span>
+                    </div>
+                    <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 4px;">
+                        N{{ offer.amount_offered|floatformat:0|intcomma }} at {{ offer.interest_rate }}%
+                    </p>
+                    <p style="font-size: 0.8125rem; color: var(--gray-500); margin-bottom: 12px;">
+                        {{ offer.duration_months }} months | Monthly: N{{ offer.monthly_payment|floatformat:0|intcomma }}
+                    </p>
+                    <div style="display: flex; gap: 8px;">
+                        <a href="{% url 'loans:accept_offer' offer.id %}" class="btn btn-sm btn-primary" style="flex: 1;">Accept</a>
+                        <a href="{% url 'loans:decline_offer' offer.id %}" class="btn btn-sm btn-outline" style="flex: 1;">Decline</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

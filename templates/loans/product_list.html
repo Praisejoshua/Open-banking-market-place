@@ -1,0 +1,94 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+{% block title %}Browse Loans - Open Banking Marketplace{% endblock %}
+{% block page_title %}Loan Products{% endblock %}
+
+{% block content %}
+<!-- Filters -->
+<div class="filters-bar">
+    <div class="filter-group">
+        <label><i class="fas fa-filter"></i> Loan Type</label>
+        <select onchange="window.location.href='?loan_type=' + this.value">
+            <option value="">All Types</option>
+            {% for type_id, type_name in loan_types %}
+            <option value="{{ type_id }}" {% if request.GET.loan_type == type_id %}selected{% endif %}>{{ type_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="filter-group">
+        <label>Max Rate</label>
+        <select onchange="window.location.href='?max_rate=' + this.value">
+            <option value="">Any Rate</option>
+            <option value="10" {% if request.GET.max_rate == "10" %}selected{% endif %}>Below 10%</option>
+            <option value="20" {% if request.GET.max_rate == "20" %}selected{% endif %}>Below 20%</option>
+            <option value="30" {% if request.GET.max_rate == "30" %}selected{% endif %}>Below 30%</option>
+        </select>
+    </div>
+    <div class="filter-group" style="margin-left: auto;">
+        <div class="header-search" style="margin: 0;">
+            <i class="fas fa-search"></i>
+            <input type="text" name="search" placeholder="Search products..." value="{{ request.GET.search }}" onkeypress="if(event.key==='Enter') window.location.href='?search=' + this.value">
+        </div>
+    </div>
+</div>
+
+<!-- Products Grid -->
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        <div class="product-card-header">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+                <span class="badge badge-info">{{ product.get_loan_type_display }}</span>
+                {% if product.is_featured %}
+                <span class="badge badge-warning"><i class="fas fa-star"></i> Featured</span>
+                {% endif %}
+            </div>
+            <h3 style="margin-top: 10px;">{{ product.name }}</h3>
+            <span class="product-lender"><i class="fas fa-building"></i> {{ product.lender.company_name|default:product.lender.get_full_name }}</span>
+        </div>
+        <div class="product-card-body">
+            <p style="font-size: 0.875rem; color: var(--gray-500); margin-bottom: 16px; line-height: 1.5;">{{ product.description|truncatechars:120 }}</p>
+            <div class="product-details">
+                <div class="product-detail">
+                    <span class="product-detail-label">Amount</span>
+                    <span class="product-detail-value">N{{ product.min_amount|floatformat:0|intcomma }} - N{{ product.max_amount|floatformat:0|intcomma }}</span>
+                </div>
+                <div class="product-detail">
+                    <span class="product-detail-label">Interest Rate</span>
+                    <span class="product-detail-value" style="color: var(--accent-green);">{{ product.interest_rate }}% p.a.</span>
+                </div>
+                <div class="product-detail">
+                    <span class="product-detail-label">Duration</span>
+                    <span class="product-detail-value">{{ product.duration_range }}</span>
+                </div>
+                <div class="product-detail">
+                    <span class="product-detail-label">Processing Fee</span>
+                    <span class="product-detail-value">{{ product.processing_fee_percent }}%</span>
+                </div>
+            </div>
+            {% if product.features %}
+            <div class="product-features">
+                {% for feature in product.features|slice:":3" %}
+                <span class="product-feature-tag"><i class="fas fa-check" style="color: var(--accent-green);"></i> {{ feature }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        <div class="product-card-footer">
+            <a href="{% url 'loans:product_detail' product.id %}" class="btn btn-outline btn-sm" style="flex: 1;">View Details</a>
+            {% if user.is_authenticated and user.is_borrower %}
+            <a href="{% url 'loans:apply_with_product' product.id %}" class="btn btn-primary btn-sm" style="flex: 1;">Apply Now</a>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <div class="card" style="grid-column: 1 / -1;">
+        <div class="empty-state">
+            <i class="fas fa-search"></i>
+            <h3>No Products Found</h3>
+            <p>No loan products match your current filters. Try adjusting your search criteria.</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

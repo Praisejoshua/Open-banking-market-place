@@ -1,0 +1,117 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+
+{% block title %}Review Application - Open Banking Marketplace{% endblock %}
+{% block page_title %}Review Application{% endblock %}
+
+{% block content %}
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+    <!-- Application Details -->
+    <div>
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-header">
+                <div>
+                    <span style="font-family: monospace; color: var(--gray-500); font-size: 0.875rem;">#{{ application.id|truncatechars:8 }}</span>
+                    <h3 style="margin-top: 4px;">{{ application.get_loan_type_display }} - N{{ application.amount_requested|floatformat:0|intcomma }}</h3>
+                </div>
+                <span class="badge badge-{% if application.status == 'approved' %}success{% elif application.status == 'rejected' %}danger{% elif application.status == 'submitted' %}info{% else %}warning{% endif %}" style="font-size: 0.875rem;">{{ application.get_status_display }}</span>
+            </div>
+            <div class="card-body">
+                <h4 style="margin-bottom: 16px;">Applicant Information</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--gray-50); border-radius: var(--radius);">
+                        <div class="profile-avatar" style="width: 40px; height: 40px;">{{ application.borrower.first_name|first }}{{ application.borrower.last_name|first }}</div>
+                        <div>
+                            <span style="font-weight: 600; display: block;">{{ application.borrower.get_full_name }}</span>
+                            <span style="font-size: 0.8125rem; color: var(--gray-500);">{{ application.borrower.email }}</span>
+                        </div>
+                    </div>
+                    <div style="padding: 12px; background: var(--gray-50); border-radius: var(--radius);">
+                        <span style="font-size: 0.8125rem; color: var(--gray-500);">Employment</span>
+                        <span style="font-weight: 600; display: block;">{{ application.borrower.employment_status|default:"Not specified"|title }}</span>
+                        <span style="font-size: 0.8125rem; color: var(--gray-500);">{{ application.employer_name }}</span>
+                    </div>
+                </div>
+                
+                <h4 style="margin-bottom: 16px;">Financial Details</h4>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px;">
+                    <div style="padding: 12px; background: var(--gray-50); border-radius: var(--radius);">
+                        <span style="font-size: 0.8125rem; color: var(--gray-500);">Monthly Income</span>
+                        <span style="font-weight: 600; display: block;">N{{ application.monthly_income|floatformat:0|intcomma }}</span>
+                    </div>
+                    <div style="padding: 12px; background: var(--gray-50); border-radius: var(--radius);">
+                        <span style="font-size: 0.8125rem; color: var(--gray-500);">Monthly Expenses</span>
+                        <span style="font-weight: 600; display: block;">N{{ application.monthly_expenses|floatformat:0|intcomma }}</span>
+                    </div>
+                    <div style="padding: 12px; background: var(--gray-50); border-radius: var(--radius);">
+                        <span style="font-size: 0.8125rem; color: var(--gray-500);">Debt-to-Income</span>
+                        <span class="badge badge-{% if application.debt_to_income_ratio < 30 %}success{% elif application.debt_to_income_ratio < 50 %}warning{% else %}danger{% endif %}" style="display: inline-block; margin-top: 4px;">{{ application.debt_to_income_ratio|floatformat:1 }}%</span>
+                    </div>
+                </div>
+                
+                <h4 style="margin-bottom: 16px;">Loan Purpose</h4>
+                <p style="color: var(--gray-600); line-height: 1.6; padding: 16px; background: var(--gray-50); border-radius: var(--radius);">{{ application.purpose }}</p>
+            </div>
+        </div>
+        
+        <!-- Action Form -->
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-gavel"></i> Decision</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Status Notes</label>
+                        <textarea name="status_notes" class="form-control" rows="3" placeholder="Add notes about your decision..."></textarea>
+                    </div>
+                    <div style="display: flex; gap: 12px;">
+                        <button type="submit" name="action" value="approve" class="btn btn-success btn-lg" style="flex: 1;">
+                            <i class="fas fa-check"></i> Approve Application
+                        </button>
+                        <button type="submit" name="action" value="reject" class="btn btn-danger btn-lg" style="flex: 1;">
+                            <i class="fas fa-times"></i> Reject Application
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sidebar -->
+    <div>
+        {% if credit_score %}
+        <div class="card" style="margin-bottom: 20px;">
+            <div class="card-header">
+                <h3><i class="fas fa-chart-line"></i> Credit Score</h3>
+            </div>
+            <div class="card-body" style="text-align: center;">
+                <div style="width: 120px; height: 120px; border-radius: 50%; border: 8px solid {{ credit_score.score_color }}; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                    <span style="font-size: 2rem; font-weight: 700; color: {{ credit_score.score_color }};">{{ credit_score.total_score }}</span>
+                </div>
+                <p style="font-weight: 600; color: {{ credit_score.score_color }};">{{ credit_score.get_risk_category_display }}</p>
+                <p style="font-size: 0.8125rem; color: var(--gray-500);">Default Probability: {{ credit_score.default_probability }}%</p>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Matching Products -->
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-box-open"></i> Your Products</h3>
+            </div>
+            <div class="card-body" style="padding: 16px;">
+                {% for product in matching_products %}
+                <div style="padding: 12px; background: var(--gray-50); border-radius: var(--radius); margin-bottom: 10px;">
+                    <span style="font-weight: 600; display: block;">{{ product.name }}</span>
+                    <span style="font-size: 0.8125rem; color: var(--gray-500);">{{ product.interest_rate }}% | N{{ product.min_amount|floatformat:0|intcomma }} - N{{ product.max_amount|floatformat:0|intcomma }}</span>
+                </div>
+                {% empty %}
+                <p style="text-align: center; color: var(--gray-500);">No matching products.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

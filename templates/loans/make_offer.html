@@ -1,0 +1,110 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+{% block title %}Make Offer - Open Banking Marketplace{% endblock %}
+{% block page_title %}Make Loan Offer{% endblock %}
+
+{% block content %}
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+    <div class="card">
+        <div class="card-header">
+            <h3><i class="fas fa-gift"></i> Make Loan Offer</h3>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-info" style="margin-bottom: 24px;">
+                <i class="fas fa-info-circle"></i> 
+                Application from <strong>{{ application.borrower.get_full_name }}</strong> for 
+                <strong>N{{ application.amount_requested|floatformat:0|intcomma }}</strong> 
+                {{ application.get_loan_type_display }} loan
+            </div>
+            
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label>Select Loan Product</label>
+                    <select name="loan_product" class="form-select" required>
+                        <option value="">-- Select Product --</option>
+                        {% for product in products %}
+                        <option value="{{ product.id }}">{{ product.name }} - {{ product.interest_rate }}%</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Amount Offered (N)</label>
+                        {{ form.amount_offered }}
+                        {% if form.amount_offered.errors %}<div class="field-error">{{ form.amount_offered.errors }}</div>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label>Interest Rate (%)</label>
+                        {{ form.interest_rate }}
+                        {% if form.interest_rate.errors %}<div class="field-error">{{ form.interest_rate.errors }}</div>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label>Duration (months)</label>
+                        {{ form.duration_months }}
+                        {% if form.duration_months.errors %}<div class="field-error">{{ form.duration_months.errors }}</div>{% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Personalized Message</label>
+                    {{ form.offer_message }}
+                </div>
+                <div class="form-group">
+                    <label>Special Conditions</label>
+                    {{ form.special_conditions }}
+                </div>
+                
+                <div style="display: flex; gap: 12px;">
+                    <button type="submit" class="btn btn-primary btn-lg" style="flex: 1;">
+                        <i class="fas fa-paper-plane"></i> Send Offer
+                    </button>
+                    <a href="{% url 'loans:incoming_applications' %}" class="btn btn-outline btn-lg">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Applicant Summary -->
+    <div class="card">
+        <div class="card-header">
+            <h3>Applicant Summary</h3>
+        </div>
+        <div class="card-body">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div class="profile-avatar" style="width: 60px; height: 60px; font-size: 1.25rem; margin: 0 auto 10px;">
+                    {{ application.borrower.first_name|first }}{{ application.borrower.last_name|first }}
+                </div>
+                <h4>{{ application.borrower.get_full_name }}</h4>
+                <p style="font-size: 0.8125rem; color: var(--gray-500);">{{ application.borrower.employment_status|default:""|title }}</p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                    <span style="color: var(--gray-500);">Requested</span>
+                    <span style="font-weight: 600;">N{{ application.amount_requested|floatformat:0|intcomma }}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                    <span style="color: var(--gray-500);">Duration</span>
+                    <span style="font-weight: 600;">{{ application.duration_months }} months</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                    <span style="color: var(--gray-500);">Monthly Income</span>
+                    <span style="font-weight: 600;">N{{ application.monthly_income|floatformat:0|intcomma }}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                    <span style="color: var(--gray-500);">DTI Ratio</span>
+                    <span class="badge badge-{% if application.debt_to_income_ratio < 30 %}success{% elif application.debt_to_income_ratio < 50 %}warning{% else %}danger{% endif %}">{{ application.debt_to_income_ratio|floatformat:1 }}%</span>
+                </div>
+                {% if application.credit_score %}
+                <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                    <span style="color: var(--gray-500);">Credit Score</span>
+                    <span class="badge badge-{% if application.credit_score >= 750 %}success{% elif application.credit_score >= 580 %}info{% else %}warning{% endif %}">{{ application.credit_score }}</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

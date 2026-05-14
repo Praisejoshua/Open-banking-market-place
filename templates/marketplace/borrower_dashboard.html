@@ -1,0 +1,231 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+
+{% block title %}Borrower Dashboard - Open Banking Marketplace{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<!-- Stats Row -->
+<div class="dashboard-grid">
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon blue"><i class="fas fa-file-alt"></i></div>
+        </div>
+        <div class="stat-value">{{ total_applied }}</div>
+        <div class="stat-label">Total Applications</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+        </div>
+        <div class="stat-value">{{ total_approved }}</div>
+        <div class="stat-label">Approved</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon purple"><i class="fas fa-hand-holding-usd"></i></div>
+        </div>
+        <div class="stat-value">{{ total_active }}</div>
+        <div class="stat-label">Active Loans</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon orange"><i class="fas fa-chart-line"></i></div>
+        </div>
+        <div class="stat-value">{{ credit_score.total_score|default:"--" }}</div>
+        <div class="stat-label">Credit Score</div>
+    </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+    <!-- Recent Applications -->
+    <div class="dashboard-section">
+        <div class="section-header-flex">
+            <h2><i class="fas fa-clipboard-list"></i> Recent Applications</h2>
+            <a href="{% url 'loans:my_applications' %}" class="btn btn-sm btn-outline">View All</a>
+        </div>
+        <div class="card">
+            <div class="card-body" style="padding: 0;">
+                {% if recent_applications %}
+                <div class="application-list" style="padding: 8px;">
+                    {% for app in recent_applications %}
+                    <div class="application-card">
+                        <div class="application-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="application-info">
+                            <h4>{{ app.get_loan_type_display }} Loan</h4>
+                            <span class="application-meta">{{ app.purpose|truncatechars:50 }}</span>
+                        </div>
+                        <div class="application-amount">
+                            <span class="amount">N{{ app.amount_requested|floatformat:0|intcomma }}</span>
+                            <span class="badge badge-{% if app.status == 'approved' %}success{% elif app.status == 'rejected' %}danger{% elif app.status == 'submitted' %}info{% else %}warning{% endif %}">{{ app.get_status_display }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="empty-state">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>No Applications Yet</h3>
+                    <p>Start by browsing available loan products and submitting your first application.</p>
+                    <a href="{% url 'loans:product_list' %}" class="btn btn-primary mt-2">
+                        <i class="fas fa-search"></i> Browse Loans
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column -->
+    <div>
+        <!-- Credit Score -->
+        <div class="dashboard-section">
+            <div class="section-header-flex">
+                <h2><i class="fas fa-chart-line"></i> Credit Score</h2>
+                <a href="{% url 'loans:credit_score' %}" class="btn btn-sm btn-outline">Details</a>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    {% if credit_score %}
+                    <div class="credit-score-display" style="padding: 20px;">
+                        <div class="score-circle">
+                            <svg class="score-ring" width="200" height="200" viewBox="0 0 200 200">
+                                <circle class="score-ring-bg" cx="100" cy="100" r="80"/>
+                                <circle class="score-ring-fill" cx="100" cy="100" r="80"
+                                    stroke="{{ credit_score.score_color }}"
+                                    stroke-dasharray="502"
+                                    stroke-dashoffset="{{ credit_score.score_offset|default:0 }}"
+                                    data-target="{{ credit_score.score_offset }}"/>
+                            </svg>
+                            <div class="score-value">
+                                <span class="score-number" style="font-size: 2rem;">{{ credit_score.total_score }}</span>
+                                <span class="score-label" style="color: {{ credit_score.score_color }}; font-weight: 600;">{{ credit_score.get_risk_category_display }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 12px;">
+                        <p style="font-size: 0.8125rem; color: var(--gray-500);">
+                            Default Probability: <strong style="color: var(--gray-700);">{{ credit_score.default_probability }}%</strong>
+                        </p>
+                    </div>
+                    {% else %}
+                    <div class="empty-state" style="padding: 40px 20px;">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>No Credit Score</h3>
+                        <p>Link a bank account to generate your credit score.</p>
+                        <a href="{% url 'banking:link_account' %}" class="btn btn-primary btn-sm mt-2">
+                            <i class="fas fa-link"></i> Link Account
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Offers -->
+        <div class="dashboard-section">
+            <div class="section-header-flex">
+                <h2><i class="fas fa-gift"></i> Pending Offers</h2>
+                <a href="{% url 'loans:my_applications' %}" class="btn btn-sm btn-outline">View All</a>
+            </div>
+            <div class="card">
+                <div class="card-body" style="padding: 16px;">
+                    {% if pending_offers %}
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        {% for offer in pending_offers %}
+                        <div style="padding: 16px; background: var(--gray-50); border-radius: var(--radius); border-left: 3px solid var(--accent-green);">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                                <span style="font-weight: 600; font-size: 0.9375rem; color: var(--gray-800);">{{ offer.lender.company_name|default:offer.lender.get_full_name }}</span>
+                                <span class="badge badge-success">NEW</span>
+                            </div>
+                            <p style="font-size: 0.875rem; color: var(--gray-600); margin-bottom: 8px;">
+                                N{{ offer.amount_offered|floatformat:0|intcomma }} at {{ offer.interest_rate }}% for {{ offer.duration_months }} months
+                            </p>
+                            <p style="font-size: 0.8125rem; color: var(--gray-500); margin-bottom: 12px;">
+                                Monthly: N{{ offer.monthly_payment|floatformat:0|intcomma }}
+                            </p>
+                            <div style="display: flex; gap: 8px;">
+                                <a href="{% url 'loans:accept_offer' offer.id %}" class="btn btn-sm btn-primary" style="flex: 1;">
+                                    <i class="fas fa-check"></i> Accept
+                                </a>
+                                <a href="{% url 'loans:decline_offer' offer.id %}" class="btn btn-sm btn-outline" style="flex: 1;">
+                                    <i class="fas fa-times"></i> Decline
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="empty-state" style="padding: 30px 20px;">
+                        <i class="fas fa-gift" style="font-size: 2rem;"></i>
+                        <p style="font-size: 0.875rem; margin-top: 8px;">No pending offers</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Products -->
+<div class="dashboard-section">
+    <div class="section-header-flex">
+        <h2><i class="fas fa-star"></i> Featured Loan Products</h2>
+        <a href="{% url 'loans:product_list' %}" class="btn btn-sm btn-outline">View All Products</a>
+    </div>
+    {% if featured_products %}
+    <div class="product-grid">
+        {% for product in featured_products %}
+        <div class="product-card">
+            <div class="product-card-header">
+                <span class="badge badge-info">{{ product.get_loan_type_display }}</span>
+                <h3>{{ product.name }}</h3>
+                <span class="product-lender"><i class="fas fa-building"></i> {{ product.lender.company_name|default:product.lender.get_full_name }}</span>
+            </div>
+            <div class="product-card-body">
+                <div class="product-details">
+                    <div class="product-detail">
+                        <span class="product-detail-label">Amount Range</span>
+                        <span class="product-detail-value">N{{ product.min_amount|floatformat:0|intcomma }} - N{{ product.max_amount|floatformat:0|intcomma }}</span>
+                    </div>
+                    <div class="product-detail">
+                        <span class="product-detail-label">Interest Rate</span>
+                        <span class="product-detail-value" style="color: var(--accent-green);">{{ product.interest_rate }}% p.a.</span>
+                    </div>
+                    <div class="product-detail">
+                        <span class="product-detail-label">Duration</span>
+                        <span class="product-detail-value">{{ product.duration_range }}</span>
+                    </div>
+                    <div class="product-detail">
+                        <span class="product-detail-label">Processing Fee</span>
+                        <span class="product-detail-value">{{ product.processing_fee_percent }}%</span>
+                    </div>
+                </div>
+                {% if product.features %}
+                <div class="product-features">
+                    {% for feature in product.features|slice:":3" %}
+                    <span class="product-feature-tag"><i class="fas fa-check" style="color: var(--accent-green);"></i> {{ feature }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="product-card-footer">
+                <a href="{% url 'loans:product_detail' product.id %}" class="btn btn-outline btn-sm" style="flex: 1;">Details</a>
+                <a href="{% url 'loans:apply_with_product' product.id %}" class="btn btn-primary btn-sm" style="flex: 1;">Apply Now</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="card">
+        <div class="empty-state">
+            <i class="fas fa-box-open"></i>
+            <h3>No Featured Products</h3>
+            <p>Check back later for featured loan products from our partner lenders.</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+{% block title %}Accept Offer - Open Banking Marketplace{% endblock %}
+{% block page_title %}Accept Loan Offer{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto;">
+    <div class="card">
+        <div class="card-header">
+            <h3><i class="fas fa-check-circle" style="color: var(--accent-green);"></i> Confirm Offer Acceptance</h3>
+        </div>
+        <div class="card-body" style="text-align: center;">
+            <div style="padding: 20px; background: var(--accent-green-light); border-radius: var(--radius-lg); margin-bottom: 24px;">
+                <h4 style="color: #047857; margin-bottom: 16px;">Loan Offer Summary</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: left;">
+                    <div>
+                        <span style="font-size: 0.8125rem; color: #047857;">Lender</span>
+                        <span style="display: block; font-weight: 600; color: #047857;">{{ offer.lender.company_name|default:offer.lender.get_full_name }}</span>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.8125rem; color: #047857;">Amount</span>
+                        <span style="display: block; font-weight: 600; color: #047857;">N{{ offer.amount_offered|floatformat:0|intcomma }}</span>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.8125rem; color: #047857;">Interest Rate</span>
+                        <span style="display: block; font-weight: 600; color: #047857;">{{ offer.interest_rate }}%</span>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.8125rem; color: #047857;">Duration</span>
+                        <span style="display: block; font-weight: 600; color: #047857;">{{ offer.duration_months }} months</span>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.8125rem; color: #047857;">Monthly Payment</span>
+                        <span style="display: block; font-weight: 600; color: #047857;">N{{ offer.monthly_payment|floatformat:0|intcomma }}</span>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.8125rem; color: #047857;">Total Repayment</span>
+                        <span style="display: block; font-weight: 600; color: #047857;">N{{ offer.total_repayment|floatformat:0|intcomma }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="color: var(--gray-600); margin-bottom: 24px;">By accepting this offer, you agree to the loan terms and conditions. The funds will be disbursed to your linked bank account.</p>
+            
+            <form method="post" style="display: flex; gap: 12px; justify-content: center;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success btn-lg" style="min-width: 160px;">
+                    <i class="fas fa-check"></i> Accept Offer
+                </button>
+                <a href="{% url 'loans:application_detail' offer.application.id %}" class="btn btn-outline btn-lg">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

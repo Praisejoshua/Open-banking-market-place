@@ -1,0 +1,146 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+
+{% block title %}{{ product.name }} - Open Banking Marketplace{% endblock %}
+{% block page_title %}Loan Product Details{% endblock %}
+
+{% block content %}
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+    <!-- Main Info -->
+    <div>
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <span class="badge badge-info">{{ product.get_loan_type_display }}</span>
+                    <h3 style="margin-top: 8px;">{{ product.name }}</h3>
+                    <span style="font-size: 0.875rem; color: var(--gray-500);">
+                        <i class="fas fa-building"></i> {{ product.lender.company_name|default:product.lender.get_full_name }}
+                        {% if product.lender.license_number %}
+                        | License: {{ product.lender.license_number }}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <div class="card-body">
+                <p style="color: var(--gray-600); line-height: 1.7; margin-bottom: 24px;">{{ product.description }}</p>
+                
+                <h4 style="margin-bottom: 16px; color: var(--gray-800);">Loan Terms</h4>
+                <div class="product-details" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+                    <div class="product-detail" style="padding: 16px; background: var(--gray-50); border-radius: var(--radius);">
+                        <span class="product-detail-label">Amount Range</span>
+                        <span class="product-detail-value" style="font-size: 1.125rem;">N{{ product.min_amount|floatformat:0|intcomma }} - N{{ product.max_amount|floatformat:0|intcomma }}</span>
+                    </div>
+                    <div class="product-detail" style="padding: 16px; background: var(--gray-50); border-radius: var(--radius);">
+                        <span class="product-detail-label">Interest Rate</span>
+                        <span class="product-detail-value" style="font-size: 1.125rem; color: var(--accent-green);">{{ product.interest_rate }}% p.a.</span>
+                    </div>
+                    <div class="product-detail" style="padding: 16px; background: var(--gray-50); border-radius: var(--radius);">
+                        <span class="product-detail-label">Duration</span>
+                        <span class="product-detail-value" style="font-size: 1.125rem;">{{ product.duration_range }}</span>
+                    </div>
+                    <div class="product-detail" style="padding: 16px; background: var(--gray-50); border-radius: var(--radius);">
+                        <span class="product-detail-label">Processing Fee</span>
+                        <span class="product-detail-value" style="font-size: 1.125rem;">{{ product.processing_fee_percent }}%</span>
+                    </div>
+                    <div class="product-detail" style="padding: 16px; background: var(--gray-50); border-radius: var(--radius);">
+                        <span class="product-detail-label">Late Payment</span>
+                        <span class="product-detail-value" style="font-size: 1.125rem;">{{ product.late_payment_penalty }}%</span>
+                    </div>
+                    <div class="product-detail" style="padding: 16px; background: var(--gray-50); border-radius: var(--radius);">
+                        <span class="product-detail-label">Early Repayment</span>
+                        <span class="product-detail-value" style="font-size: 1.125rem;">{{ product.early_repayment_penalty }}%</span>
+                    </div>
+                </div>
+                
+                {% if product.features %}
+                <h4 style="margin-bottom: 12px; color: var(--gray-800);">Features</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
+                    {% for feature in product.features %}
+                    <span style="padding: 8px 14px; background: var(--accent-green-light); color: #047857; border-radius: var(--radius-full); font-size: 0.8125rem;">
+                        <i class="fas fa-check-circle"></i> {{ feature }}
+                    </span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                {% if product.requirements %}
+                <h4 style="margin-bottom: 12px; color: var(--gray-800);">Requirements</h4>
+                <ul style="list-style: none; padding: 0;">
+                    {% for req in product.requirements %}
+                    <li style="padding: 8px 0; border-bottom: 1px solid var(--gray-100); font-size: 0.875rem; color: var(--gray-600);">
+                        <i class="fas fa-check" style="color: var(--primary); margin-right: 8px;"></i> {{ req }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Side Panel -->
+    <div>
+        <!-- Apply Card -->
+        <div class="card" style="margin-bottom: 20px;">
+            <div class="card-body">
+                <h4 style="margin-bottom: 16px;">Apply for this Loan</h4>
+                {% if user.is_authenticated %}
+                    {% if user.is_borrower %}
+                        {% if has_pending_application %}
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i> You have a pending application.
+                        </div>
+                        {% else %}
+                        <a href="{% url 'loans:apply_with_product' product.id %}" class="btn btn-primary btn-block btn-lg">
+                            <i class="fas fa-file-signature"></i> Apply Now
+                        </a>
+                        {% endif %}
+                    {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Only borrowers can apply for loans.
+                    </div>
+                    {% endif %}
+                {% else %}
+                <a href="{% url 'accounts:login' %}" class="btn btn-primary btn-block btn-lg">
+                    <i class="fas fa-sign-in-alt"></i> Sign In to Apply
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Eligibility -->
+        <div class="card">
+            <div class="card-body">
+                <h4 style="margin-bottom: 16px;">Eligibility Criteria</h4>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                        <span style="color: var(--gray-500);">Min Credit Score</span>
+                        <span style="font-weight: 600;">{{ product.min_credit_score }}+</span>
+                    </div>
+                    {% if product.min_annual_income %}
+                    <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                        <span style="color: var(--gray-500);">Min Annual Income</span>
+                        <span style="font-weight: 600;">N{{ product.min_annual_income|floatformat:0|intcomma }}</span>
+                    </div>
+                    {% endif %}
+                    <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                        <span style="color: var(--gray-500);">Max Debt-to-Income</span>
+                        <span style="font-weight: 600;">{{ product.max_debt_to_income_ratio }}%</span>
+                    </div>
+                    {% if product.requires_collateral %}
+                    <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                        <span style="color: var(--gray-500);">Collateral</span>
+                        <span class="badge badge-warning">Required</span>
+                    </div>
+                    <p style="font-size: 0.8125rem; color: var(--gray-500);">{{ product.collateral_description }}</p>
+                    {% else %}
+                    <div style="display: flex; justify-content: space-between; font-size: 0.875rem;">
+                        <span style="color: var(--gray-500);">Collateral</span>
+                        <span class="badge badge-success">Not Required</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

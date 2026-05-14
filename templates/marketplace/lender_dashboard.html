@@ -1,0 +1,173 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+
+{% block title %}Lender Dashboard - Open Banking Marketplace{% endblock %}
+{% block page_title %}Lender Dashboard{% endblock %}
+
+{% block content %}
+<!-- Stats Row -->
+<div class="dashboard-grid">
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon blue"><i class="fas fa-box-open"></i></div>
+        </div>
+        <div class="stat-value">{{ active_products }}</div>
+        <div class="stat-label">Active Products</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon orange"><i class="fas fa-inbox"></i></div>
+        </div>
+        <div class="stat-value">{{ incoming_apps }}</div>
+        <div class="stat-label">Pending Applications</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon green"><i class="fas fa-check-circle"></i></div>
+        </div>
+        <div class="stat-value">{{ approved_apps }}</div>
+        <div class="stat-label">Approved</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header">
+            <div class="stat-icon purple"><i class="fas fa-money-bill-wave"></i></div>
+        </div>
+        <div class="stat-value">N{{ total_disbursed|floatformat:0|intcomma }}</div>
+        <div class="stat-label">Total Disbursed</div>
+    </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+    <!-- Recent Applications -->
+    <div class="dashboard-section">
+        <div class="section-header-flex">
+            <h2><i class="fas fa-inbox"></i> Recent Applications</h2>
+            <a href="{% url 'loans:incoming_applications' %}" class="btn btn-sm btn-outline">View All</a>
+        </div>
+        <div class="card">
+            <div class="card-body" style="padding: 0;">
+                {% if recent_applications %}
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Applicant</th>
+                            <th>Loan Type</th>
+                            <th>Amount</th>
+                            <th>Credit Score</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for app in recent_applications %}
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div class="profile-avatar" style="width: 32px; height: 32px; font-size: 0.625rem;">
+                                        {{ app.borrower.first_name|first }}{{ app.borrower.last_name|first }}
+                                    </div>
+                                    <span style="font-weight: 500;">{{ app.borrower.get_full_name }}</span>
+                                </div>
+                            </td>
+                            <td>{{ app.get_loan_type_display }}</td>
+                            <td style="font-weight: 600;">N{{ app.amount_requested|floatformat:0|intcomma }}</td>
+                            <td>
+                                {% if app.credit_score %}
+                                <span class="badge badge-{% if app.credit_score >= 750 %}success{% elif app.credit_score >= 580 %}info{% else %}warning{% endif %}">
+                                    {{ app.credit_score }}
+                                </span>
+                                {% else %}
+                                <span class="badge badge-secondary">Pending</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="badge badge-{% if app.status == 'approved' %}success{% elif app.status == 'rejected' %}danger{% elif app.status == 'submitted' %}info{% else %}warning{% endif %}">
+                                    {{ app.get_status_display }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{% url 'loans:review_application' app.id %}" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-eye"></i> Review
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="empty-state">
+                    <i class="fas fa-inbox"></i>
+                    <h3>No Applications Yet</h3>
+                    <p>Applications will appear here when borrowers apply for your loan products.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column -->
+    <div>
+        <!-- Quick Actions -->
+        <div class="dashboard-section">
+            <div class="section-header-flex">
+                <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+            </div>
+            <div class="card">
+                <div class="card-body" style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="{% url 'loans:create_product' %}" class="btn btn-primary btn-block">
+                        <i class="fas fa-plus"></i> Create Loan Product
+                    </a>
+                    <a href="{% url 'loans:incoming_applications' %}" class="btn btn-outline btn-block">
+                        <i class="fas fa-inbox"></i> Review Applications
+                    </a>
+                    <a href="{% url 'loans:lender_products' %}" class="btn btn-outline btn-block">
+                        <i class="fas fa-box-open"></i> Manage Products
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Trend -->
+        <div class="dashboard-section">
+            <div class="section-header-flex">
+                <h2><i class="fas fa-chart-bar"></i> Application Trend</h2>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="trendChart" width="300" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('trendChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ months|safe }},
+            datasets: [{
+                label: 'Applications',
+                data: {{ app_counts }},
+                borderColor: '#2563eb',
+                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, ticks: { stepSize: 1 } }
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

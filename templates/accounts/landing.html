@@ -1,0 +1,241 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}Open Banking Marketplace - Find the Best Loan Offers{% endblock %}
+
+{% block landing_content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-bg">
+        <div class="hero-shape shape-1"></div>
+        <div class="hero-shape shape-2"></div>
+        <div class="hero-shape shape-3"></div>
+    </div>
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure Open Banking Platform</span>
+                </div>
+                <h1 class="hero-title">
+                    Find the Best<br>
+                    <span class="gradient-text">Loan Offers</span><br>
+                    From Multiple Lenders
+                </h1>
+                <p class="hero-subtitle">
+                    Connect your bank accounts securely through Open Banking APIs. 
+                    Get AI-driven credit scores and receive personalized loan offers 
+                    from trusted financial institutions.
+                </p>
+                <div class="hero-cta">
+                    <a href="{% url 'accounts:register' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-rocket"></i>
+                        Get Started
+                    </a>
+                    <a href="{% url 'loans:product_list' %}" class="btn btn-outline btn-lg">
+                        <i class="fas fa-search"></i>
+                        Browse Loans
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">{{ total_users|default:"10K+" }}</span>
+                        <span class="stat-label">Active Users</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ total_lenders|default:"50+" }}</span>
+                        <span class="stat-label">Partner Lenders</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-number">N5B+</span>
+                        <span class="stat-label">Loans Facilitated</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card card-1">
+                    <div class="card-icon green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-label">Loan Approved</span>
+                        <span class="card-value">N2,500,000</span>
+                    </div>
+                </div>
+                <div class="floating-card card-2">
+                    <div class="card-icon blue">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-label">Credit Score</span>
+                        <span class="card-value">785</span>
+                    </div>
+                </div>
+                <div class="floating-card card-3">
+                    <div class="card-icon purple">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-label">Interest Rate</span>
+                        <span class="card-value">12.5%</span>
+                    </div>
+                </div>
+                <div class="hero-ring"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features" id="features">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Features</span>
+            <h2 class="section-title">Why Choose Our Platform</h2>
+            <p class="section-subtitle">Experience a new way of accessing loans with cutting-edge technology and secure banking integration.</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon blue">
+                    <i class="fas fa-link"></i>
+                </div>
+                <h3>Open Banking Integration</h3>
+                <p>Securely link your bank accounts using Open Banking APIs. We support all major Nigerian banks with real-time data synchronization.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon green">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI Credit Scoring</h3>
+                <p>Our machine learning models analyze your financial data to provide accurate credit scores and better loan matching.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon purple">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3>Compare Offers</h3>
+                <p>Receive and compare loan offers from multiple lenders side by side. Choose the best terms, rates, and conditions.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon orange">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Fast Processing</h3>
+                <p>Get loan decisions in minutes, not days. Our automated systems process applications with real-time credit checks.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon red">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Bank-Grade Security</h3>
+                <p>Your data is protected with 256-bit encryption, OAuth2 authentication, and compliance with PCI DSS standards.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon teal">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h3>Financial Analytics</h3>
+                <p>Track your spending, monitor loan repayments, and get insights into your financial health with detailed analytics.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works" id="how-it-works">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">Process</span>
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Get your loan in four simple steps with our streamlined process.</p>
+        </div>
+        
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <div class="step-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3>Create Account</h3>
+                <p>Register as a borrower and complete your profile with basic information and identity verification.</p>
+            </div>
+            
+            <div class="step-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <div class="step-icon">
+                    <i class="fas fa-link"></i>
+                </div>
+                <h3>Link Bank Account</h3>
+                <p>Securely connect your bank accounts through our Open Banking integration for instant verification.</p>
+            </div>
+            
+            <div class="step-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <div class="step-icon">
+                    <i class="fas fa-file-signature"></i>
+                </div>
+                <h3>Apply for Loan</h3>
+                <p>Submit your loan application with your preferred amount, duration, and purpose.</p>
+            </div>
+            
+            <div class="step-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">04</div>
+                <div class="step-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3>Get Funded</h3>
+                <p>Receive personalized loan offers from multiple lenders and choose the best one for you.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-card">
+            <div class="cta-content">
+                <h2>Ready to Get Started?</h2>
+                <p>Join thousands of borrowers who have found better loan rates through our marketplace. Registration is free and takes less than 2 minutes.</p>
+                <div class="cta-buttons">
+                    <a href="{% url 'accounts:register' %}" class="btn btn-white btn-lg">
+                        <i class="fas fa-user-plus"></i>
+                        Register as Borrower
+                    </a>
+                    <a href="{% url 'accounts:register' %}" class="btn btn-outline-white btn-lg">
+                        <i class="fas fa-building"></i>
+                        Register as Lender
+                    </a>
+                </div>
+            </div>
+            <div class="cta-shapes">
+                <div class="cta-shape"></div>
+                <div class="cta-shape"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

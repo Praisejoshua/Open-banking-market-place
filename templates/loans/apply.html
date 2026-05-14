@@ -1,0 +1,161 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+{% block title %}Apply for Loan - Open Banking Marketplace{% endblock %}
+{% block page_title %}Loan Application{% endblock %}
+
+{% block content %}
+<!-- Progress Steps -->
+<div class="progress-steps">
+    <div class="step completed">
+        <div class="step-indicator"><i class="fas fa-check"></i></div>
+        <span class="step-label">Eligibility</span>
+    </div>
+    <div class="step active">
+        <div class="step-indicator">2</div>
+        <span class="step-label">Application</span>
+    </div>
+    <div class="step">
+        <div class="step-indicator">3</div>
+        <span class="step-label">Credit Check</span>
+    </div>
+    <div class="step">
+        <div class="step-indicator">4</div>
+        <span class="step-label">Offers</span>
+    </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+    <!-- Application Form -->
+    <div class="card">
+        <div class="card-header">
+            <h3><i class="fas fa-file-signature"></i> Loan Application Form</h3>
+        </div>
+        <div class="card-body">
+            {% if loan_product %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> Applying for: <strong>{{ loan_product.name }}</strong> from {{ loan_product.lender.company_name|default:loan_product.lender.get_full_name }}
+            </div>
+            {% endif %}
+            
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Loan Type</label>
+                        {{ form.loan_type }}
+                        {% if form.loan_type.errors %}<div class="field-error">{{ form.loan_type.errors }}</div>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label>Duration (months)</label>
+                        {{ form.duration_months }}
+                        {% if form.duration_months.errors %}<div class="field-error">{{ form.duration_months.errors }}</div>{% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Loan Purpose</label>
+                    {{ form.purpose }}
+                    {% if form.purpose.errors %}<div class="field-error">{{ form.purpose.errors }}</div>{% endif %}
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Amount Requested (N)</label>
+                        {{ form.amount_requested }}
+                        {% if form.amount_requested.errors %}<div class="field-error">{{ form.amount_requested.errors }}</div>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label>Monthly Income (N)</label>
+                        {{ form.monthly_income }}
+                        {% if form.monthly_income.errors %}<div class="field-error">{{ form.monthly_income.errors }}</div>{% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Monthly Expenses (N)</label>
+                        {{ form.monthly_expenses }}
+                        {% if form.monthly_expenses.errors %}<div class="field-error">{{ form.monthly_expenses.errors }}</div>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label>Existing Debt (N)</label>
+                        {{ form.existing_debt }}
+                        {% if form.existing_debt.errors %}<div class="field-error">{{ form.existing_debt.errors }}</div>{% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Employer Name</label>
+                    {{ form.employer_name }}
+                    {% if form.employer_name.errors %}<div class="field-error">{{ form.employer_name.errors }}</div>{% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label>Employer Address</label>
+                    {{ form.employer_address }}
+                    {% if form.employer_address.errors %}<div class="field-error">{{ form.employer_address.errors }}</div>{% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        {{ form.agree_terms }}
+                        <span class="checkmark"></span>
+                        I confirm all information is accurate
+                    </label>
+                    {% if form.agree_terms.errors %}<div class="field-error">{{ form.agree_terms.errors }}</div>{% endif %}
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-lg btn-block">
+                    <i class="fas fa-paper-plane"></i> Submit Application
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Loan Calculator -->
+    <div>
+        <div class="card" style="position: sticky; top: 90px;">
+            <div class="card-header">
+                <h3><i class="fas fa-calculator"></i> Loan Calculator</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Loan Amount (N)</label>
+                    <input type="number" id="calc-amount" class="form-control" value="{{ loan_product.min_amount|default:100000 }}" oninput="calculateLoan()">
+                </div>
+                <div class="form-group">
+                    <label>Interest Rate (%)</label>
+                    <input type="number" id="calc-rate" class="form-control" value="{{ loan_product.interest_rate|default:15 }}" step="0.01" oninput="calculateLoan()">
+                </div>
+                <div class="form-group">
+                    <label>Duration (months)</label>
+                    <input type="number" id="calc-months" class="form-control" value="{{ loan_product.min_duration_months|default:12 }}" oninput="calculateLoan()">
+                </div>
+                <div style="background: var(--gray-50); border-radius: var(--radius); padding: 16px; margin-top: 16px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="font-size: 0.875rem; color: var(--gray-500);">Monthly Payment</span>
+                        <span id="calc-monthly" style="font-weight: 700; color: var(--primary);">--</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="font-size: 0.875rem; color: var(--gray-500);">Total Repayment</span>
+                        <span id="calc-total" style="font-weight: 600;">--</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-size: 0.875rem; color: var(--gray-500);">Total Interest</span>
+                        <span id="calc-interest" style="font-weight: 600; color: var(--accent-orange);">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    calculateLoan();
+});
+</script>
+{% endblock %}

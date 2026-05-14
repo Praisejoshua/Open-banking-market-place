@@ -1,0 +1,79 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+{% block title %}My Applications - Open Banking Marketplace{% endblock %}
+{% block page_title %}My Applications{% endblock %}
+
+{% block content %}
+<div class="section-header-flex">
+    <h2>Application History</h2>
+    <a href="{% url 'loans:apply' %}" class="btn btn-primary btn-sm">
+        <i class="fas fa-plus"></i> New Application
+    </a>
+</div>
+
+<!-- Status Tabs -->
+<div class="tabs">
+    <a href="?status=" class="tab {% if current_filter == 'all' %}active{% endif %}">All</a>
+    <a href="?status=submitted" class="tab {% if current_filter == 'submitted' %}active{% endif %}">Submitted</a>
+    <a href="?status=under_review" class="tab {% if current_filter == 'under_review' %}active{% endif %}">Under Review</a>
+    <a href="?status=approved" class="tab {% if current_filter == 'approved' %}active{% endif %}">Approved</a>
+    <a href="?status=rejected" class="tab {% if current_filter == 'rejected' %}active{% endif %}">Rejected</a>
+    <a href="?status=disbursed" class="tab {% if current_filter == 'disbursed' %}active{% endif %}">Disbursed</a>
+</div>
+
+<div class="card">
+    <div class="card-body" style="padding: 0;">
+        {% if applications %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Loan Type</th>
+                    <th>Amount</th>
+                    <th>Duration</th>
+                    <th>Status</th>
+                    <th>Credit Score</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in applications %}
+                <tr>
+                    <td style="font-family: monospace; font-size: 0.8125rem;">#{{ app.id|truncatechars:8 }}</td>
+                    <td>{{ app.get_loan_type_display }}</td>
+                    <td style="font-weight: 600;">N{{ app.amount_requested|floatformat:0|intcomma }}</td>
+                    <td>{{ app.duration_months }} months</td>
+                    <td>
+                        <span class="badge badge-{% if app.status == 'approved' or app.status == 'disbursed' or app.status == 'offer_accepted' %}success{% elif app.status == 'rejected' %}danger{% elif app.status == 'submitted' %}info{% else %}warning{% endif %}">
+                            {{ app.get_status_display }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if app.credit_score %}
+                        <span class="badge badge-{% if app.credit_score >= 750 %}success{% elif app.credit_score >= 580 %}info{% else %}warning{% endif %}">{{ app.credit_score }}</span>
+                        {% else %}
+                        <span class="badge badge-secondary">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td style="font-size: 0.8125rem; color: var(--gray-500);">{{ app.created_at|date:"M d, Y" }}</td>
+                    <td>
+                        <a href="{% url 'loans:application_detail' app.id %}" class="btn btn-sm btn-outline">View</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-clipboard-list"></i>
+            <h3>No Applications Found</h3>
+            <p>You haven't submitted any loan applications yet.</p>
+            <a href="{% url 'loans:apply' %}" class="btn btn-primary mt-2">
+                <i class="fas fa-plus"></i> Apply Now
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

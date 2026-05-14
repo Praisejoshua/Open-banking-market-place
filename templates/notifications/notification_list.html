@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Notifications - Open Banking Marketplace{% endblock %}
+{% block page_title %}Notifications{% endblock %}
+
+{% block content %}
+<div class="section-header-flex">
+    <h2><i class="fas fa-bell"></i> Notifications</h2>
+    {% if unread_count > 0 %}
+    <form method="post" action="{% url 'notifications:mark_all_read' %}" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline btn-sm">
+            <i class="fas fa-check-double"></i> Mark All as Read
+        </button>
+    </form>
+    {% endif %}
+</div>
+
+<!-- Filter Tabs -->
+<div class="tabs">
+    <a href="?filter=all" class="tab {% if filter_type == 'all' or not filter_type %}active{% endif %}">All</a>
+    <a href="?filter=unread" class="tab {% if filter_type == 'unread' %}active{% endif %}">Unread ({{ unread_count }})</a>
+    <a href="?filter=read" class="tab {% if filter_type == 'read' %}active{% endif %}">Read</a>
+</div>
+
+<div class="card">
+    <div class="card-body" style="padding: 0;">
+        {% if notifications %}
+        <div class="notification-list">
+            {% for notification in notifications %}
+            <div class="notification-item {% if not notification.is_read %}unread{% endif %}" style="padding: 16px 20px; border-bottom: 1px solid var(--gray-100);">
+                <div class="notification-icon {{ notification.notification_type|default:'default' }}" style="width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0;
+                    {% if notification.notification_type == 'loan_approved' %}background: var(--accent-green-light); color: var(--accent-green);
+                    {% elif notification.notification_type == 'loan_rejected' %}background: var(--accent-red-light); color: var(--accent-red);
+                    {% elif notification.notification_type == 'new_offer' %}background: var(--accent-purple-light); color: var(--accent-purple);
+                    {% else %}background: var(--primary-50); color: var(--primary);{% endif %}">
+                    <i class="fas fa-{% if notification.notification_type == 'loan_approved' %}check-circle{% elif notification.notification_type == 'loan_rejected' %}times-circle{% elif notification.notification_type == 'new_offer' %}gift{% elif notification.notification_type == 'payment_due' %}clock{% else %}info-circle{% endif %}"></i>
+                </div>
+                <div class="notification-content" style="flex: 1;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <p class="notification-title" style="font-size: 0.9375rem;">{{ notification.title }}</p>
+                        <span style="font-size: 0.75rem; color: var(--gray-400); white-space: nowrap;">{{ notification.created_at|timesince }} ago</span>
+                    </div>
+                    <p class="notification-text">{{ notification.message }}</p>
+                    {% if notification.action_url %}
+                    <a href="{{ notification.action_url }}" style="font-size: 0.8125rem; font-weight: 500;">
+                        <i class="fas fa-arrow-right"></i> {{ notification.action_text|default:"View Details" }}
+                    </a>
+                    {% endif %}
+                </div>
+                {% if not notification.is_read %}
+                <form method="post" action="{% url 'notifications:mark_read' notification.id %}" style="margin-left: 12px;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline" style="white-space: nowrap;">Mark Read</button>
+                </form>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-bell-slash"></i>
+            <h3>No Notifications</h3>
+            <p>You don't have any notifications at the moment.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

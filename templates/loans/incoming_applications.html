@@ -1,0 +1,120 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+{% block title %}Incoming Applications - Open Banking Marketplace{% endblock %}
+{% block page_title %}Incoming Applications{% endblock %}
+
+{% block content %}
+<div class="section-header-flex">
+    <h2><i class="fas fa-inbox"></i> Loan Applications</h2>
+</div>
+
+<!-- Filters -->
+<div class="filters-bar">
+    <form method="get" style="display: flex; gap: 12px; flex-wrap: wrap; width: 100%;">
+        <div class="filter-group">
+            <label>Status</label>
+            {{ filter_form.status }}
+        </div>
+        <div class="filter-group">
+            <label>Type</label>
+            {{ filter_form.loan_type }}
+        </div>
+        <div class="filter-group">
+            <label>From</label>
+            {{ filter_form.date_from }}
+        </div>
+        <div class="filter-group">
+            <label>To</label>
+            {{ filter_form.date_to }}
+        </div>
+        <div class="filter-group">
+            <label>Search</label>
+            {{ filter_form.search }}
+        </div>
+        <div class="filter-group" style="margin-left: auto;">
+            <label>&nbsp;</label>
+            <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-filter"></i> Filter</button>
+        </div>
+    </form>
+</div>
+
+<div class="card">
+    <div class="card-body" style="padding: 0;">
+        {% if applications %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Applicant</th>
+                    <th>Loan Type</th>
+                    <th>Amount</th>
+                    <th>Duration</th>
+                    <th>Credit Score</th>
+                    <th>Risk</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in applications %}
+                <tr>
+                    <td>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="profile-avatar" style="width: 32px; height: 32px; font-size: 0.625rem;">
+                                {{ app.borrower.first_name|first }}{{ app.borrower.last_name|first }}
+                            </div>
+                            <div>
+                                <span style="font-weight: 500; display: block;">{{ app.borrower.get_full_name }}</span>
+                                <span style="font-size: 0.75rem; color: var(--gray-400);">DTI: {{ app.debt_to_income_ratio|floatformat:1 }}%</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{ app.get_loan_type_display }}</td>
+                    <td style="font-weight: 600;">N{{ app.amount_requested|floatformat:0|intcomma }}</td>
+                    <td>{{ app.duration_months }} mo</td>
+                    <td>
+                        {% if app.credit_score %}
+                        <span class="badge badge-{% if app.credit_score >= 750 %}success{% elif app.credit_score >= 580 %}info{% else %}warning{% endif %}">{{ app.credit_score }}</span>
+                        {% else %}
+                        <span class="badge badge-secondary">--</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if app.risk_category %}
+                        <span class="badge badge-{% if app.risk_category == 'excellent' %}success{% elif app.risk_category == 'good' %}info{% elif app.risk_category == 'fair' %}warning{% else %}danger{% endif %}">{{ app.risk_category|title }}</span>
+                        {% else %}
+                        <span class="badge badge-secondary">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <span class="badge badge-{% if app.status == 'approved' or app.status == 'disbursed' %}success{% elif app.status == 'rejected' %}danger{% elif app.status == 'submitted' %}info{% else %}warning{% endif %}">
+                            {{ app.get_status_display }}
+                        </span>
+                    </td>
+                    <td style="font-size: 0.8125rem; color: var(--gray-500);">{{ app.created_at|date:"M d" }}</td>
+                    <td>
+                        <div style="display: flex; gap: 6px;">
+                            <a href="{% url 'loans:review_application' app.id %}" class="btn btn-sm btn-primary">
+                                <i class="fas fa-eye"></i> Review
+                            </a>
+                            {% if app.status == 'under_review' or app.status == 'credit_check' %}
+                            <a href="{% url 'loans:make_offer' app.id %}" class="btn btn-sm btn-success">
+                                <i class="fas fa-gift"></i> Offer
+                            </a>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-inbox"></i>
+            <h3>No Applications Found</h3>
+            <p>No loan applications match your current filters.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

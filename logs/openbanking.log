@@ -1,0 +1,2175 @@
+INFO 2026-04-19 09:38:45,457 autoreload 1264 139987348913024 Watching for file changes with StatReloader
+INFO 2026-04-19 09:38:49,416 log 1264 139987211253440 "GET / HTTP/1.1" 200 12874
+INFO 2026-04-19 09:39:32,084 autoreload 1280 139771887577984 Watching for file changes with StatReloader
+INFO 2026-04-19 09:39:34,324 log 1264 139987211253440 "GET / HTTP/1.1" 200 12874
+INFO 2026-04-19 09:41:39,440 autoreload 1264 139987348913024 /home/kimi/.local/lib/python3.12/site-packages/django/contrib/auth/management/__init__.py changed, reloading.
+INFO 2026-04-19 09:41:41,686 autoreload 1303 140099251977088 Watching for file changes with StatReloader
+INFO 2026-04-19 14:48:04,481 autoreload 13996 15052 Watching for file changes with StatReloader
+INFO 2026-04-19 14:49:34,263 autoreload 3588 15960 Watching for file changes with StatReloader
+INFO 2026-04-19 14:49:39,973 basehttp 3588 11472 "GET / HTTP/1.1" 200 12874
+INFO 2026-04-19 14:49:39,998 basehttp 3588 11472 "GET /static/css/style.css HTTP/1.1" 200 43381
+INFO 2026-04-19 14:49:40,015 basehttp 3588 11472 "GET /static/js/main.js HTTP/1.1" 200 7970
+INFO 2026-04-19 14:49:57,374 basehttp 3588 11472 "GET /login/ HTTP/1.1" 200 6423
+WARNING 2026-04-19 14:49:57,495 log 3588 11472 Not Found: /favicon.ico
+WARNING 2026-04-19 14:49:57,495 basehttp 3588 11472 "GET /favicon.ico HTTP/1.1" 404 4322
+INFO 2026-04-19 14:50:02,925 basehttp 3588 11472 "GET /register/ HTTP/1.1" 200 9537
+ERROR 2026-04-19 14:50:28,387 log 3588 11472 Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: UNIQUE constraint failed: accounts_userpreference.user_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\edit.py", line 184, in post
+    return super().post(request, *args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\edit.py", line 153, in post
+    return self.form_valid(form)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 31, in form_valid
+    UserPreference.objects.create(user=self.object)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\query.py", line 671, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\base.py", line 831, in save
+    self.save_base(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\base.py", line 882, in save_base
+    updated = self._save_table(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\base.py", line 1025, in _save_table
+    results = self._do_insert(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\base.py", line 1066, in _do_insert
+    return manager._insert(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\query.py", line 1790, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\sql\compiler.py", line 1657, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: UNIQUE constraint failed: accounts_userpreference.user_id
+ERROR 2026-04-19 14:50:28,429 basehttp 3588 11472 "POST /register/ HTTP/1.1" 500 185488
+INFO 2026-04-19 14:53:18,685 basehttp 3588 11472 "GET / HTTP/1.1" 200 12871
+ERROR 2026-04-19 14:53:22,821 log 3588 11472 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 14:53:22,834 basehttp 3588 11472 "GET /loans/products/ HTTP/1.1" 500 241444
+INFO 2026-04-19 14:53:33,735 basehttp 3588 11472 "GET /register/ HTTP/1.1" 200 9537
+INFO 2026-04-19 14:53:36,483 basehttp 3588 11472 "GET /register/ HTTP/1.1" 200 9537
+INFO 2026-04-19 14:53:40,484 basehttp 3588 11472 "GET / HTTP/1.1" 200 12871
+ERROR 2026-04-19 14:53:45,276 log 3588 11472 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 14:53:45,286 basehttp 3588 11472 "GET /loans/products/ HTTP/1.1" 500 241444
+ERROR 2026-04-19 14:53:54,176 log 3588 11472 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 14:53:54,186 basehttp 3588 11472 "GET /loans/products/ HTTP/1.1" 500 241444
+INFO 2026-04-19 14:56:52,059 autoreload 3588 15960 C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py changed, reloading.
+INFO 2026-04-19 14:56:53,350 autoreload 16792 18836 Watching for file changes with StatReloader
+INFO 2026-04-19 14:57:58,571 autoreload 3240 4344 Watching for file changes with StatReloader
+INFO 2026-04-19 14:58:04,278 basehttp 3240 13792 "GET / HTTP/1.1" 200 12871
+INFO 2026-04-19 14:58:07,784 basehttp 3240 13792 "GET /register/ HTTP/1.1" 200 9537
+INFO 2026-04-19 14:58:25,592 basehttp 3240 13792 "POST /register/ HTTP/1.1" 200 10335
+ERROR 2026-04-19 14:58:46,423 log 3240 13792 Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: UNIQUE constraint failed: accounts_user.username
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\edit.py", line 184, in post
+    return super().post(request, *args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\edit.py", line 153, in post
+    return self.form_valid(form)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 29, in form_valid
+    response = super().form_valid(form)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\edit.py", line 135, in form_valid
+    self.object = form.save()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\forms.py", line 143, in save
+    user.save()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\base_user.py", line 68, in save
+    super().save(*args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\base.py", line 831, in save
+    self.save_base(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\base.py", line 882, in save_base
+    updated = self._save_table(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\base.py", line 1025, in _save_table
+    results = self._do_insert(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\base.py", line 1066, in _do_insert
+    return manager._insert(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\query.py", line 1790, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\sql\compiler.py", line 1657, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: UNIQUE constraint failed: accounts_user.username
+ERROR 2026-04-19 14:58:46,457 basehttp 3240 13792 "POST /register/ HTTP/1.1" 500 205544
+ERROR 2026-04-19 14:59:14,332 log 3240 13792 Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: UNIQUE constraint failed: accounts_user.username
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\base.py", line 142, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\edit.py", line 184, in post
+    return super().post(request, *args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\edit.py", line 153, in post
+    return self.form_valid(form)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 29, in form_valid
+    response = super().form_valid(form)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\views\generic\edit.py", line 135, in form_valid
+    self.object = form.save()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\forms.py", line 143, in save
+    user.save()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\base_user.py", line 68, in save
+    super().save(*args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\base.py", line 831, in save
+    self.save_base(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\base.py", line 882, in save_base
+    updated = self._save_table(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\base.py", line 1025, in _save_table
+    results = self._do_insert(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\base.py", line 1066, in _do_insert
+    return manager._insert(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\query.py", line 1790, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\models\sql\compiler.py", line 1657, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: UNIQUE constraint failed: accounts_user.username
+ERROR 2026-04-19 14:59:14,332 basehttp 3240 13792 "POST /register/ HTTP/1.1" 500 205580
+INFO 2026-04-19 15:04:03,866 autoreload 3240 4344 C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\forms.py changed, reloading.
+INFO 2026-04-19 15:04:04,926 autoreload 17064 15700 Watching for file changes with StatReloader
+INFO 2026-04-19 15:04:17,568 autoreload 3812 20292 Watching for file changes with StatReloader
+INFO 2026-04-19 15:04:30,717 autoreload 3812 20292 C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\forms.py changed, reloading.
+INFO 2026-04-19 15:04:32,317 autoreload 13628 1076 Watching for file changes with StatReloader
+INFO 2026-04-19 15:04:35,564 basehttp 13628 20352 "POST /register/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:04:35,595 basehttp 13628 20352 "GET /login/ HTTP/1.1" 200 6975
+ERROR 2026-04-19 15:05:24,665 log 13628 20352 Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: django_cache
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 63, in login_view
+    login(request, user)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\__init__.py", line 118, in login
+    request.session.cycle_key()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\base.py", line 304, in cycle_key
+    self.create()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\cache.py", line 42, in create
+    self._session_key = self._get_new_session_key()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\base.py", line 150, in _get_new_session_key
+    if not self.exists(session_key):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\cache.py", line 73, in exists
+    bool(session_key) and (self.cache_key_prefix + session_key) in self._cache
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\cache\backends\base.py", line 299, in __contains__
+    return self.has_key(key)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\cache\backends\db.py", line 245, in has_key
+    cursor.execute(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: django_cache
+ERROR 2026-04-19 15:05:24,682 basehttp 13628 20352 "POST /login/ HTTP/1.1" 500 144695
+INFO 2026-04-19 15:05:43,097 autoreload 13628 1076 C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\forms.py changed, reloading.
+INFO 2026-04-19 15:05:44,362 autoreload 17604 3440 Watching for file changes with StatReloader
+INFO 2026-04-19 15:07:39,335 autoreload 17604 3440 C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\forms.py changed, reloading.
+INFO 2026-04-19 15:07:40,497 autoreload 20300 14216 Watching for file changes with StatReloader
+INFO 2026-04-19 15:08:07,893 autoreload 2024 14960 Watching for file changes with StatReloader
+ERROR 2026-04-19 15:08:10,752 log 2024 896 Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: django_cache
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 63, in login_view
+    login(request, user)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\__init__.py", line 118, in login
+    request.session.cycle_key()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\base.py", line 304, in cycle_key
+    self.create()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\cache.py", line 42, in create
+    self._session_key = self._get_new_session_key()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\base.py", line 150, in _get_new_session_key
+    if not self.exists(session_key):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\cache.py", line 73, in exists
+    bool(session_key) and (self.cache_key_prefix + session_key) in self._cache
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\cache\backends\base.py", line 299, in __contains__
+    return self.has_key(key)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\cache\backends\db.py", line 245, in has_key
+    cursor.execute(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: django_cache
+ERROR 2026-04-19 15:08:10,761 basehttp 2024 896 "POST /login/ HTTP/1.1" 500 144695
+INFO 2026-04-19 15:10:05,543 autoreload 11520 2656 Watching for file changes with StatReloader
+ERROR 2026-04-19 15:10:09,273 log 11520 18468 Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: django_cache
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 63, in login_view
+    login(request, user)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\__init__.py", line 118, in login
+    request.session.cycle_key()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\base.py", line 304, in cycle_key
+    self.create()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\cache.py", line 42, in create
+    self._session_key = self._get_new_session_key()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\base.py", line 150, in _get_new_session_key
+    if not self.exists(session_key):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\cache.py", line 73, in exists
+    bool(session_key) and (self.cache_key_prefix + session_key) in self._cache
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\cache\backends\base.py", line 299, in __contains__
+    return self.has_key(key)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\cache\backends\db.py", line 245, in has_key
+    cursor.execute(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: django_cache
+ERROR 2026-04-19 15:10:09,273 basehttp 11520 18468 "POST /login/ HTTP/1.1" 500 144695
+INFO 2026-04-19 15:10:44,511 basehttp 11520 18468 "GET / HTTP/1.1" 200 12871
+INFO 2026-04-19 15:10:47,134 basehttp 11520 18468 "GET / HTTP/1.1" 200 12871
+INFO 2026-04-19 15:10:47,308 basehttp 11520 18468 "GET / HTTP/1.1" 200 12871
+INFO 2026-04-19 15:10:47,685 basehttp 11520 18468 "GET / HTTP/1.1" 200 12871
+INFO 2026-04-19 15:10:47,888 basehttp 11520 18468 "GET / HTTP/1.1" 200 12871
+INFO 2026-04-19 15:10:48,057 basehttp 11520 18468 "GET / HTTP/1.1" 200 12871
+INFO 2026-04-19 15:10:48,238 basehttp 11520 18468 "GET / HTTP/1.1" 200 12871
+INFO 2026-04-19 15:10:48,335 basehttp 11520 18468 "GET / HTTP/1.1" 200 12871
+INFO 2026-04-19 15:10:49,925 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+ERROR 2026-04-19 15:10:51,389 log 11520 18468 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:10:51,390 basehttp 11520 18468 "GET /loans/products/ HTTP/1.1" 500 241450
+INFO 2026-04-19 15:10:58,615 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:00,227 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:00,445 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:00,641 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:03,760 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:06,480 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:07,246 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:07,888 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:08,494 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:08,883 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:09,077 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:09,263 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:09,434 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:09,565 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:09,756 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6423
+INFO 2026-04-19 15:11:14,732 basehttp 11520 18468 "GET /register/ HTTP/1.1" 200 9537
+INFO 2026-04-19 15:11:48,939 basehttp 11520 18468 "POST /register/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:11:48,956 basehttp 11520 18468 "GET /login/ HTTP/1.1" 200 6975
+ERROR 2026-04-19 15:12:10,812 log 11520 18468 Internal Server Error: /login/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: django_cache
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 63, in login_view
+    login(request, user)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\__init__.py", line 118, in login
+    request.session.cycle_key()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\base.py", line 304, in cycle_key
+    self.create()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\cache.py", line 42, in create
+    self._session_key = self._get_new_session_key()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\base.py", line 150, in _get_new_session_key
+    if not self.exists(session_key):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\sessions\backends\cache.py", line 73, in exists
+    bool(session_key) and (self.cache_key_prefix + session_key) in self._cache
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\cache\backends\base.py", line 299, in __contains__
+    return self.has_key(key)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\cache\backends\db.py", line 245, in has_key
+    cursor.execute(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\db\backends\sqlite3\base.py", line 357, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: django_cache
+ERROR 2026-04-19 15:12:10,812 basehttp 11520 18468 "POST /login/ HTTP/1.1" 500 144650
+INFO 2026-04-19 15:13:55,293 autoreload 19152 2860 Watching for file changes with StatReloader
+INFO 2026-04-19 15:15:02,022 basehttp 19152 9124 "POST /login/ HTTP/1.1" 302 0
+ERROR 2026-04-19 15:15:02,257 log 19152 9124 Internal Server Error: /marketplace/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\marketplace\views.py", line 20, in dashboard
+    return borrower_dashboard(request)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\marketplace\views.py", line 77, in borrower_dashboard
+    return render(request, 'marketplace/borrower_dashboard.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 954, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:15:02,273 basehttp 19152 9124 "GET /marketplace/dashboard/ HTTP/1.1" 500 352408
+INFO 2026-04-19 15:21:56,539 autoreload 536 14724 Watching for file changes with StatReloader
+ERROR 2026-04-19 15:22:01,424 log 536 5092 Internal Server Error: /marketplace/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\marketplace\views.py", line 20, in dashboard
+    return borrower_dashboard(request)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\marketplace\views.py", line 77, in borrower_dashboard
+    return render(request, 'marketplace/borrower_dashboard.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 954, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:22:01,424 basehttp 536 5092 "GET /marketplace/dashboard/ HTTP/1.1" 500 352408
+ERROR 2026-04-19 15:23:42,869 log 536 5092 Internal Server Error: /marketplace/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\marketplace\views.py", line 20, in dashboard
+    return borrower_dashboard(request)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\marketplace\views.py", line 77, in borrower_dashboard
+    return render(request, 'marketplace/borrower_dashboard.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 954, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:23:42,885 basehttp 536 5092 "GET /marketplace/dashboard/ HTTP/1.1" 500 352408
+ERROR 2026-04-19 15:23:45,165 log 536 5092 Internal Server Error: /marketplace/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\marketplace\views.py", line 20, in dashboard
+    return borrower_dashboard(request)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\marketplace\views.py", line 77, in borrower_dashboard
+    return render(request, 'marketplace/borrower_dashboard.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 954, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:23:45,165 basehttp 536 5092 "GET /marketplace/dashboard/ HTTP/1.1" 500 352408
+INFO 2026-04-19 15:27:49,540 basehttp 536 5092 "GET /marketplace/dashboard/ HTTP/1.1" 200 12141
+INFO 2026-04-19 15:27:49,582 basehttp 536 5092 "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2026-04-19 15:27:49,597 basehttp 536 5092 "GET /static/js/main.js HTTP/1.1" 304 0
+ERROR 2026-04-19 15:27:59,547 log 536 5092 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:27:59,547 basehttp 536 5092 "GET /loans/products/ HTTP/1.1" 500 241702
+ERROR 2026-04-19 15:28:52,679 log 536 5092 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:28:52,679 basehttp 536 5092 "GET /loans/products/ HTTP/1.1" 500 241839
+ERROR 2026-04-19 15:28:53,945 log 536 5092 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:28:53,955 basehttp 536 5092 "GET /loans/products/ HTTP/1.1" 500 241839
+ERROR 2026-04-19 15:28:54,211 log 536 5092 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:28:54,212 basehttp 536 5092 "GET /loans/products/ HTTP/1.1" 500 241839
+ERROR 2026-04-19 15:29:00,896 log 536 5092 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:29:00,912 basehttp 536 5092 "GET /loans/products/ HTTP/1.1" 500 241839
+ERROR 2026-04-19 15:29:02,062 log 536 5092 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:29:02,070 basehttp 536 5092 "GET /loans/products/ HTTP/1.1" 500 241839
+ERROR 2026-04-19 15:29:02,375 log 536 5092 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:29:02,378 basehttp 536 5092 "GET /loans/products/ HTTP/1.1" 500 241839
+ERROR 2026-04-19 15:29:02,670 log 536 5092 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:29:02,679 basehttp 536 5092 "GET /loans/products/ HTTP/1.1" 500 241839
+ERROR 2026-04-19 15:29:02,957 log 536 5092 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:29:02,962 basehttp 536 5092 "GET /loans/products/ HTTP/1.1" 500 241839
+ERROR 2026-04-19 15:31:35,524 log 536 5092 Internal Server Error: /loans/products/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 42, in select_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\defaulttags.py", line 854, in do_for
+    nodelist_loop = parser.parse(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:31:35,533 basehttp 536 5092 "GET /loans/products/ HTTP/1.1" 500 241839
+INFO 2026-04-19 15:32:49,922 basehttp 536 5092 "GET /loans/products/ HTTP/1.1" 200 9480
+INFO 2026-04-19 15:32:52,823 basehttp 536 5092 "GET /loans/apply/ HTTP/1.1" 200 14826
+INFO 2026-04-19 15:32:52,907 basehttp 536 5092 "POST /loans/ajax/calculate/ HTTP/1.1" 200 108
+INFO 2026-04-19 15:32:54,991 basehttp 536 5092 "GET /loans/my-applications/ HTTP/1.1" 200 8207
+INFO 2026-04-19 15:32:56,639 basehttp 536 5092 "GET /loans/credit-score/ HTTP/1.1" 200 13103
+ERROR 2026-04-19 15:33:00,372 log 536 5092 Internal Server Error: /banking/accounts/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\banking\views.py", line 27, in linked_accounts
+    return render(request, 'banking/linked_accounts.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:33:00,380 basehttp 536 5092 "GET /banking/accounts/ HTTP/1.1" 500 239361
+ERROR 2026-04-19 15:33:06,097 log 536 5092 Internal Server Error: /banking/accounts/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\banking\views.py", line 27, in linked_accounts
+    return render(request, 'banking/linked_accounts.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\backends\django.py", line 34, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 200, in compile_nodelist
+    return parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 293, in do_extends
+    nodelist = parser.parse()
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 513, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 511, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader_tags.py", line 232, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 484, in parse
+    raise self.error(token, e)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 482, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 600, in compile_filter
+    return FilterExpression(token, self)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 698, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\base.py", line 606, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'intcomma'
+ERROR 2026-04-19 15:33:06,097 basehttp 536 5092 "GET /banking/accounts/ HTTP/1.1" 500 239361
+INFO 2026-04-19 15:33:52,571 basehttp 536 5092 "GET /banking/accounts/ HTTP/1.1" 200 8695
+INFO 2026-04-19 15:34:01,608 basehttp 536 5092 "GET /banking/accounts/link/ HTTP/1.1" 200 14982
+INFO 2026-04-19 15:34:11,224 basehttp 536 14712 "GET /notifications/ HTTP/1.1" 200 7774
+ERROR 2026-04-19 15:34:12,958 log 536 14712 Internal Server Error: /settings/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 183, in settings_view
+    return render(request, 'accounts/settings.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: accounts/settings.html
+ERROR 2026-04-19 15:34:12,970 basehttp 536 14712 "GET /settings/ HTTP/1.1" 500 93553
+ERROR 2026-04-19 15:34:22,387 log 536 14712 Internal Server Error: /settings/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 183, in settings_view
+    return render(request, 'accounts/settings.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: accounts/settings.html
+ERROR 2026-04-19 15:34:22,387 basehttp 536 14712 "GET /settings/ HTTP/1.1" 500 93553
+INFO 2026-04-19 15:35:54,702 basehttp 536 14712 "GET /loans/products/ HTTP/1.1" 200 9480
+INFO 2026-04-19 15:35:55,929 basehttp 536 14712 "GET /loans/apply/ HTTP/1.1" 200 14826
+INFO 2026-04-19 15:35:55,979 basehttp 536 14712 "POST /loans/ajax/calculate/ HTTP/1.1" 200 108
+INFO 2026-04-19 15:36:58,533 basehttp 536 14712 "POST /loans/apply/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:36:58,614 basehttp 536 14712 "GET /loans/applications/0b172759-4f3e-4a99-918a-62d49d9c4376/ HTTP/1.1" 200 13741
+INFO 2026-04-19 15:37:09,840 basehttp 536 14712 "GET /loans/products/ HTTP/1.1" 200 9480
+INFO 2026-04-19 15:37:15,212 basehttp 536 14712 "GET /loans/products/ HTTP/1.1" 200 9480
+INFO 2026-04-19 15:37:16,175 basehttp 536 14712 "GET /loans/products/ HTTP/1.1" 200 9480
+INFO 2026-04-19 15:37:16,368 basehttp 536 14712 "GET /loans/products/ HTTP/1.1" 200 9480
+INFO 2026-04-19 15:37:17,868 basehttp 536 14712 "GET /loans/apply/ HTTP/1.1" 200 14826
+INFO 2026-04-19 15:37:17,924 basehttp 536 14712 "POST /loans/ajax/calculate/ HTTP/1.1" 200 108
+INFO 2026-04-19 15:37:18,732 basehttp 536 14712 "GET /loans/my-applications/ HTTP/1.1" 200 9296
+INFO 2026-04-19 15:37:21,341 basehttp 536 14712 "GET /loans/applications/0b172759-4f3e-4a99-918a-62d49d9c4376/ HTTP/1.1" 200 13128
+INFO 2026-04-19 15:37:23,766 basehttp 536 14712 "GET /loans/credit-score/ HTTP/1.1" 200 12506
+INFO 2026-04-19 15:37:32,634 basehttp 536 14712 "GET /loans/products/ HTTP/1.1" 200 9480
+INFO 2026-04-19 15:37:38,290 basehttp 536 14712 "GET /loans/products/?loan_type=wedding HTTP/1.1" 200 9488
+INFO 2026-04-19 15:37:41,241 basehttp 536 14712 "GET /loans/products/?loan_type=personal HTTP/1.1" 200 9488
+INFO 2026-04-19 15:37:43,000 basehttp 536 14712 "GET /loans/products/?loan_type=education HTTP/1.1" 200 9488
+INFO 2026-04-19 15:37:45,367 basehttp 536 14712 "GET /loans/products/?loan_type=medical HTTP/1.1" 200 9488
+INFO 2026-04-19 15:37:47,802 basehttp 536 14712 "GET /loans/products/?loan_type=agriculture HTTP/1.1" 200 9488
+INFO 2026-04-19 15:37:49,254 basehttp 536 14712 "GET /loans/products/?loan_type=agriculture HTTP/1.1" 200 9488
+INFO 2026-04-19 15:37:53,765 basehttp 536 14712 "GET / HTTP/1.1" 200 7163
+INFO 2026-04-19 15:37:58,422 basehttp 536 14712 "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:37:58,453 basehttp 536 14712 "GET /login/ HTTP/1.1" 200 6976
+INFO 2026-04-19 15:38:01,147 basehttp 536 14712 "GET /register/ HTTP/1.1" 200 9539
+INFO 2026-04-19 15:38:26,098 basehttp 536 14712 "POST /register/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:38:26,116 basehttp 536 14712 "GET /login/ HTTP/1.1" 200 6977
+INFO 2026-04-19 15:38:40,721 basehttp 536 14712 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:38:40,809 basehttp 536 14712 "GET /marketplace/dashboard/ HTTP/1.1" 200 11575
+INFO 2026-04-19 15:38:47,982 basehttp 536 14712 "GET /banking/accounts/ HTTP/1.1" 200 8335
+ERROR 2026-04-19 15:38:51,663 log 536 14712 Internal Server Error: /banking/transactions/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\banking\views.py", line 165, in transactions
+    return render(request, 'banking/transactions.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: banking/transactions.html
+ERROR 2026-04-19 15:38:51,665 basehttp 536 14712 "GET /banking/transactions/ HTTP/1.1" 500 95852
+INFO 2026-04-19 15:39:03,783 basehttp 536 14712 "GET /loans/lender/applications/ HTTP/1.1" 200 9937
+INFO 2026-04-19 15:39:23,564 basehttp 536 14712 "GET /marketplace/dashboard/ HTTP/1.1" 200 10988
+INFO 2026-04-19 15:39:25,480 basehttp 536 14712 "GET /loans/lender/applications/ HTTP/1.1" 200 9937
+INFO 2026-04-19 15:39:27,099 basehttp 536 14712 "GET /loans/lender/products/ HTTP/1.1" 200 7492
+INFO 2026-04-19 15:39:28,313 basehttp 536 14712 "GET /loans/lender/products/create/ HTTP/1.1" 200 14487
+INFO 2026-04-19 15:40:32,213 basehttp 536 14712 "POST /loans/lender/products/create/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:40:32,278 basehttp 536 14712 "GET /loans/lender/products/ HTTP/1.1" 200 9584
+INFO 2026-04-19 15:40:38,367 basehttp 536 14712 "GET /loans/lender/applications/ HTTP/1.1" 200 9937
+INFO 2026-04-19 15:40:41,014 basehttp 536 14712 "GET /loans/lender/applications/ HTTP/1.1" 200 9937
+INFO 2026-04-19 15:40:44,727 basehttp 536 14712 "GET / HTTP/1.1" 200 6803
+INFO 2026-04-19 15:40:48,129 basehttp 536 14712 "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:40:48,146 basehttp 536 14712 "GET /login/ HTTP/1.1" 200 6976
+INFO 2026-04-19 15:41:06,669 basehttp 536 14712 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:41:06,798 basehttp 536 14712 "GET /marketplace/dashboard/ HTTP/1.1" 200 14980
+INFO 2026-04-19 15:41:15,988 basehttp 536 14712 "GET /loans/my-applications/ HTTP/1.1" 200 9296
+INFO 2026-04-19 15:41:19,778 basehttp 536 14712 "GET /loans/apply/ HTTP/1.1" 200 14826
+INFO 2026-04-19 15:41:19,850 basehttp 536 14712 "POST /loans/ajax/calculate/ HTTP/1.1" 200 108
+INFO 2026-04-19 15:41:21,353 basehttp 536 14712 "GET /loans/products/ HTTP/1.1" 200 11261
+INFO 2026-04-19 15:41:29,394 basehttp 536 14712 "GET /loans/apply/7c75a710-0b9c-4041-bf6b-46abbb668b94/ HTTP/1.1" 200 15056
+INFO 2026-04-19 15:41:29,486 basehttp 536 14712 "POST /loans/ajax/calculate/ HTTP/1.1" 200 112
+INFO 2026-04-19 15:41:36,914 basehttp 536 14712 "GET /loans/products/ HTTP/1.1" 200 11261
+ERROR 2026-04-19 15:41:47,869 log 536 14712 Internal Server Error: /profile/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 138, in profile_view
+    return render(request, 'accounts/profile.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: accounts/profile.html
+ERROR 2026-04-19 15:41:47,877 basehttp 536 14712 "GET /profile/ HTTP/1.1" 500 96120
+INFO 2026-04-19 15:41:53,141 basehttp 536 14712 "GET /settings/ HTTP/1.1" 200 10116
+INFO 2026-04-19 15:41:57,438 basehttp 536 14712 "GET /notifications/ HTTP/1.1" 200 7774
+ERROR 2026-04-19 15:42:00,777 log 536 14712 Internal Server Error: /banking/transactions/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\banking\views.py", line 165, in transactions
+    return render(request, 'banking/transactions.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: banking/transactions.html
+ERROR 2026-04-19 15:42:00,793 basehttp 536 14712 "GET /banking/transactions/ HTTP/1.1" 500 95845
+INFO 2026-04-19 15:42:04,329 basehttp 536 14712 "GET /banking/accounts/ HTTP/1.1" 200 8695
+INFO 2026-04-19 15:42:08,903 basehttp 536 14712 "GET /loans/credit-score/ HTTP/1.1" 200 12506
+INFO 2026-04-19 15:42:10,675 basehttp 536 14712 "GET /loans/my-applications/ HTTP/1.1" 200 9296
+INFO 2026-04-19 15:42:14,927 basehttp 536 14712 "GET /loans/applications/0b172759-4f3e-4a99-918a-62d49d9c4376/ HTTP/1.1" 200 13128
+INFO 2026-04-19 15:42:21,843 basehttp 536 14712 "GET /loans/products/ HTTP/1.1" 200 11261
+INFO 2026-04-19 15:42:24,219 basehttp 536 14712 "GET /loans/apply/7c75a710-0b9c-4041-bf6b-46abbb668b94/ HTTP/1.1" 200 15056
+INFO 2026-04-19 15:42:24,292 basehttp 536 14712 "POST /loans/ajax/calculate/ HTTP/1.1" 200 112
+INFO 2026-04-19 15:42:52,628 basehttp 536 14712 "POST /loans/apply/7c75a710-0b9c-4041-bf6b-46abbb668b94/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:42:52,690 basehttp 536 14712 "GET /loans/applications/3d5de093-1e7b-4ba5-8df5-173203d1dec7/ HTTP/1.1" 200 13728
+INFO 2026-04-19 15:43:04,625 basehttp 536 14712 "GET /loans/my-applications/ HTTP/1.1" 200 10241
+INFO 2026-04-19 15:43:14,876 basehttp 536 14712 "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:43:14,891 basehttp 536 14712 "GET /login/ HTTP/1.1" 200 6976
+INFO 2026-04-19 15:43:45,741 basehttp 536 14712 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:43:45,823 basehttp 536 14712 "GET /marketplace/dashboard/ HTTP/1.1" 200 13387
+INFO 2026-04-19 15:43:53,384 basehttp 536 14712 "GET /loans/lender/applications/3d5de093-1e7b-4ba5-8df5-173203d1dec7/review/ HTTP/1.1" 200 12959
+ERROR 2026-04-19 15:44:15,432 log 536 14712 Internal Server Error: /loans/lender/applications/3d5de093-1e7b-4ba5-8df5-173203d1dec7/review/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\loans\views.py", line 412, in review_application
+    NotificationService.create_notification(
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\notifications\services.py", line 45, in create_notification
+    notification.action_url = NotificationService._get_object_url(related_object)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\notifications\services.py", line 83, in _get_object_url
+    'LoanOffer': f'/loans/applications/{obj.application.id}/',
+AttributeError: 'LoanApplication' object has no attribute 'application'
+ERROR 2026-04-19 15:44:15,436 basehttp 536 14712 "POST /loans/lender/applications/3d5de093-1e7b-4ba5-8df5-173203d1dec7/review/ HTTP/1.1" 500 90087
+INFO 2026-04-19 15:46:19,047 autoreload 536 14724 C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\notifications\services.py changed, reloading.
+INFO 2026-04-19 15:46:21,487 autoreload 16780 2160 Watching for file changes with StatReloader
+INFO 2026-04-19 15:47:06,653 autoreload 16780 2160 C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\notifications\services.py changed, reloading.
+INFO 2026-04-19 15:47:09,935 autoreload 12656 13952 Watching for file changes with StatReloader
+INFO 2026-04-19 15:47:45,602 autoreload 14640 17980 Watching for file changes with StatReloader
+INFO 2026-04-19 15:47:49,185 basehttp 14640 15564 "POST /loans/lender/applications/3d5de093-1e7b-4ba5-8df5-173203d1dec7/review/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:47:49,334 basehttp 14640 15564 "GET /loans/lender/applications/ HTTP/1.1" 200 12708
+INFO 2026-04-19 15:47:58,534 basehttp 14640 15564 "GET / HTTP/1.1" 200 6803
+INFO 2026-04-19 15:48:01,554 basehttp 14640 15564 "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:48:01,586 basehttp 14640 15564 "GET /login/ HTTP/1.1" 200 6976
+INFO 2026-04-19 15:48:12,583 basehttp 14640 15564 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:48:12,667 basehttp 14640 15564 "GET /marketplace/dashboard/ HTTP/1.1" 200 17069
+INFO 2026-04-19 15:48:27,395 basehttp 14640 15564 "GET /notifications/ HTTP/1.1" 200 12856
+INFO 2026-04-19 15:48:32,434 basehttp 14640 15564 "GET /loans/applications/3d5de093-1e7b-4ba5-8df5-173203d1dec7/ HTTP/1.1" 200 14521
+INFO 2026-04-19 15:48:36,325 basehttp 14640 15564 "GET /notifications/ HTTP/1.1" 200 12856
+INFO 2026-04-19 15:48:40,759 basehttp 14640 15564 "POST /notifications/mark-all-read/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:48:40,808 basehttp 14640 15564 "GET /notifications/ HTTP/1.1" 200 10793
+INFO 2026-04-19 15:48:49,810 basehttp 14640 15564 "GET /settings/ HTTP/1.1" 200 10116
+ERROR 2026-04-19 15:48:53,026 log 14640 15564 Internal Server Error: /profile/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 138, in profile_view
+    return render(request, 'accounts/profile.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: accounts/profile.html
+ERROR 2026-04-19 15:48:53,031 basehttp 14640 15564 "GET /profile/ HTTP/1.1" 500 97146
+INFO 2026-04-19 15:48:56,821 basehttp 14640 15564 "GET /banking/accounts/ HTTP/1.1" 200 8695
+INFO 2026-04-19 15:49:00,565 basehttp 14640 15564 "GET /banking/accounts/link/ HTTP/1.1" 200 14982
+INFO 2026-04-19 15:49:12,261 basehttp 14640 15564 "POST /banking/accounts/link/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:49:12,305 basehttp 14640 15564 "GET /banking/accounts/ HTTP/1.1" 200 11719
+INFO 2026-04-19 15:50:12,113 basehttp 14640 15564 "GET /banking/accounts/f7ede45c-1952-44eb-81c2-78233b96c79e/disconnect/ HTTP/1.1" 200 8446
+INFO 2026-04-19 15:50:14,436 basehttp 14640 15564 "POST /banking/accounts/f7ede45c-1952-44eb-81c2-78233b96c79e/disconnect/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:50:14,492 basehttp 14640 15564 "GET /banking/accounts/ HTTP/1.1" 200 11716
+INFO 2026-04-19 15:50:17,866 basehttp 14640 15564 "GET /banking/accounts/f7ede45c-1952-44eb-81c2-78233b96c79e/ HTTP/1.1" 200 43221
+INFO 2026-04-19 15:50:25,947 basehttp 14640 15564 "GET /banking/accounts/ HTTP/1.1" 200 11124
+INFO 2026-04-19 15:50:30,048 basehttp 14640 15564 "GET /banking/accounts/link/ HTTP/1.1" 200 14982
+INFO 2026-04-19 15:51:06,417 basehttp 14640 18576 "POST /banking/accounts/link/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:51:06,611 basehttp 14640 18576 "GET /banking/accounts/ HTTP/1.1" 200 19855
+INFO 2026-04-19 15:51:07,486 basehttp 14640 4624 - Broken pipe from ('127.0.0.1', 60665)
+INFO 2026-04-19 15:51:07,694 basehttp 14640 15564 - Broken pipe from ('127.0.0.1', 60589)
+INFO 2026-04-19 15:51:22,820 basehttp 14640 18576 "GET /banking/accounts/f7ede45c-1952-44eb-81c2-78233b96c79e/ HTTP/1.1" 200 43221
+ERROR 2026-04-19 15:51:28,036 log 14640 18576 Internal Server Error: /banking/transactions/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\banking\views.py", line 165, in transactions
+    return render(request, 'banking/transactions.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: banking/transactions.html
+ERROR 2026-04-19 15:51:28,047 basehttp 14640 18576 "GET /banking/transactions/ HTTP/1.1" 500 101055
+ERROR 2026-04-19 15:51:32,238 log 14640 18576 Internal Server Error: /banking/transactions/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\banking\views.py", line 165, in transactions
+    return render(request, 'banking/transactions.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: banking/transactions.html
+ERROR 2026-04-19 15:51:32,241 basehttp 14640 18576 "GET /banking/transactions/ HTTP/1.1" 500 101055
+INFO 2026-04-19 15:51:36,021 basehttp 14640 18576 "GET /loans/credit-score/ HTTP/1.1" 200 12506
+INFO 2026-04-19 15:51:37,808 basehttp 14640 18576 "GET /loans/my-applications/ HTTP/1.1" 200 10225
+INFO 2026-04-19 15:51:39,128 basehttp 14640 18576 "GET /loans/apply/ HTTP/1.1" 200 14826
+INFO 2026-04-19 15:51:39,203 basehttp 14640 18576 "POST /loans/ajax/calculate/ HTTP/1.1" 200 108
+INFO 2026-04-19 15:51:40,203 basehttp 14640 18576 "GET /loans/products/ HTTP/1.1" 200 11261
+INFO 2026-04-19 15:51:41,447 basehttp 14640 18576 "GET /settings/ HTTP/1.1" 200 10116
+ERROR 2026-04-19 15:51:42,469 log 14640 18576 Internal Server Error: /profile/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 138, in profile_view
+    return render(request, 'accounts/profile.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: accounts/profile.html
+ERROR 2026-04-19 15:51:42,478 basehttp 14640 18576 "GET /profile/ HTTP/1.1" 500 98026
+INFO 2026-04-19 15:51:47,577 basehttp 14640 18576 "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:51:47,580 basehttp 14640 18576 "GET /login/ HTTP/1.1" 200 6976
+INFO 2026-04-19 15:52:02,498 basehttp 14640 18576 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:52:02,591 basehttp 14640 18576 "GET /marketplace/dashboard/ HTTP/1.1" 200 13371
+INFO 2026-04-19 15:52:06,395 basehttp 14640 18576 "GET /settings/ HTTP/1.1" 200 9756
+ERROR 2026-04-19 15:52:07,959 log 14640 18576 Internal Server Error: /profile/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 138, in profile_view
+    return render(request, 'accounts/profile.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: accounts/profile.html
+ERROR 2026-04-19 15:52:07,959 basehttp 14640 18576 "GET /profile/ HTTP/1.1" 500 96220
+INFO 2026-04-19 15:52:10,810 basehttp 14640 18576 "GET /notifications/ HTTP/1.1" 200 7414
+INFO 2026-04-19 15:52:12,364 basehttp 14640 18576 "GET /banking/accounts/ HTTP/1.1" 200 8335
+INFO 2026-04-19 15:52:14,585 basehttp 14640 18576 "GET /banking/accounts/link/ HTTP/1.1" 200 14622
+INFO 2026-04-19 15:52:27,761 basehttp 14640 18576 "POST /banking/accounts/link/ HTTP/1.1" 302 0
+INFO 2026-04-19 15:52:27,818 basehttp 14640 18576 "GET /banking/accounts/ HTTP/1.1" 200 11360
+ERROR 2026-04-19 15:52:37,163 log 14640 18576 Internal Server Error: /banking/transactions/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\banking\views.py", line 165, in transactions
+    return render(request, 'banking/transactions.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: banking/transactions.html
+ERROR 2026-04-19 15:52:37,166 basehttp 14640 18576 "GET /banking/transactions/ HTTP/1.1" 500 100617
+INFO 2026-04-19 15:52:41,062 basehttp 14640 18576 "GET /settings/ HTTP/1.1" 200 9756
+INFO 2026-04-19 15:52:42,536 basehttp 14640 18576 "GET /notifications/ HTTP/1.1" 200 7414
+ERROR 2026-04-19 15:52:44,044 log 14640 18576 Internal Server Error: /profile/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 138, in profile_view
+    return render(request, 'accounts/profile.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: accounts/profile.html
+ERROR 2026-04-19 15:52:44,044 basehttp 14640 18576 "GET /profile/ HTTP/1.1" 500 96613
+INFO 2026-04-19 15:52:47,766 basehttp 14640 18576 "GET /settings/ HTTP/1.1" 200 9756
+INFO 2026-04-19 15:52:50,086 basehttp 14640 18576 "GET /loans/lender/products/ HTTP/1.1" 200 8991
+INFO 2026-04-19 15:52:52,842 basehttp 14640 18576 "GET /loans/lender/applications/ HTTP/1.1" 200 12115
+INFO 2026-04-19 15:52:56,402 basehttp 14640 18576 "GET /marketplace/dashboard/ HTTP/1.1" 200 12784
+INFO 2026-04-19 15:53:03,976 basehttp 14640 18576 "GET /loans/lender/products/ HTTP/1.1" 200 8991
+INFO 2026-04-19 16:03:59,650 basehttp 14640 14060 "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-04-19 16:03:59,668 basehttp 14640 14060 "GET /login/ HTTP/1.1" 200 6976
+INFO 2026-04-19 16:04:09,097 basehttp 14640 14060 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-04-19 16:04:09,186 basehttp 14640 4336 "GET /marketplace/dashboard/ HTTP/1.1" 200 15677
+INFO 2026-04-19 16:04:26,559 basehttp 14640 4336 "GET /loans/my-applications/ HTTP/1.1" 200 10225
+INFO 2026-04-19 16:04:30,384 basehttp 14640 4336 "GET /loans/applications/3d5de093-1e7b-4ba5-8df5-173203d1dec7/ HTTP/1.1" 200 13129
+INFO 2026-04-19 16:04:33,707 basehttp 14640 4336 "GET /loans/apply/ HTTP/1.1" 200 14826
+INFO 2026-04-19 16:04:33,813 basehttp 14640 4336 "POST /loans/ajax/calculate/ HTTP/1.1" 200 108
+INFO 2026-04-19 16:05:11,105 basehttp 14640 4336 "GET /loans/credit-score/ HTTP/1.1" 200 12506
+INFO 2026-04-19 16:05:11,160 basehttp 14640 4336 "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2026-04-19 16:05:11,170 basehttp 14640 4336 "GET /static/js/main.js HTTP/1.1" 304 0
+INFO 2026-04-19 16:05:29,442 basehttp 14640 4336 "GET /loans/products/ HTTP/1.1" 200 11261
+INFO 2026-04-19 16:05:32,731 basehttp 14640 4336 "GET /marketplace/dashboard/ HTTP/1.1" 200 15093
+INFO 2026-04-19 21:16:19,148 autoreload 17692 3812 Watching for file changes with StatReloader
+INFO 2026-04-19 21:16:27,700 basehttp 17692 19508 "GET / HTTP/1.1" 200 12871
+INFO 2026-04-19 21:16:27,738 basehttp 17692 19508 "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2026-04-19 21:16:27,752 basehttp 17692 19508 "GET /static/js/main.js HTTP/1.1" 304 0
+WARNING 2026-04-19 21:16:28,658 log 17692 19508 Not Found: /favicon.ico
+WARNING 2026-04-19 21:16:28,658 basehttp 17692 19508 "GET /favicon.ico HTTP/1.1" 404 4322
+INFO 2026-04-19 21:16:43,301 basehttp 17692 19508 "GET /loans/products/ HTTP/1.1" 200 3095
+INFO 2026-04-19 21:16:45,921 basehttp 17692 19508 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-04-19 21:16:56,684 basehttp 17692 19508 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-04-19 21:16:56,833 basehttp 17692 19508 "GET /marketplace/dashboard/ HTTP/1.1" 200 15677
+INFO 2026-04-19 21:17:01,720 basehttp 17692 19508 "GET /loans/products/ HTTP/1.1" 200 11261
+INFO 2026-04-19 21:17:03,669 basehttp 17692 19508 "GET /loans/apply/ HTTP/1.1" 200 14826
+INFO 2026-04-19 21:17:03,752 basehttp 17692 19508 "POST /loans/ajax/calculate/ HTTP/1.1" 200 108
+INFO 2026-04-19 21:17:07,699 basehttp 17692 19508 "GET /loans/my-applications/ HTTP/1.1" 200 10225
+INFO 2026-04-20 10:59:22,877 autoreload 3116 2852 Watching for file changes with StatReloader
+INFO 2026-04-20 11:01:06,483 basehttp 3116 19776 "GET / HTTP/1.1" 200 12871
+INFO 2026-04-20 11:01:06,512 basehttp 3116 19776 "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2026-04-20 11:01:06,525 basehttp 3116 19776 "GET /static/js/main.js HTTP/1.1" 304 0
+WARNING 2026-04-20 11:01:06,979 log 3116 19776 Not Found: /favicon.ico
+WARNING 2026-04-20 11:01:06,979 basehttp 3116 19776 "GET /favicon.ico HTTP/1.1" 404 4322
+INFO 2026-04-20 11:02:00,440 basehttp 3116 19776 "GET /loans/products/ HTTP/1.1" 200 3095
+INFO 2026-04-20 11:02:03,945 basehttp 3116 19776 "GET /loans/products/ HTTP/1.1" 200 3095
+INFO 2026-04-20 11:02:18,603 basehttp 3116 19776 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-04-20 11:02:26,910 basehttp 3116 19776 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-04-20 11:02:27,041 basehttp 3116 19776 "GET /marketplace/dashboard/ HTTP/1.1" 200 15677
+INFO 2026-04-20 11:26:41,919 basehttp 3116 16156 "GET /loans/apply/ HTTP/1.1" 200 14826
+INFO 2026-04-20 11:26:42,029 basehttp 3116 16156 "POST /loans/ajax/calculate/ HTTP/1.1" 200 108
+INFO 2026-04-20 11:26:44,063 basehttp 3116 16156 "GET /loans/my-applications/ HTTP/1.1" 200 10225
+INFO 2026-04-20 11:26:46,846 basehttp 3116 16156 "GET /loans/applications/3d5de093-1e7b-4ba5-8df5-173203d1dec7/ HTTP/1.1" 200 13129
+INFO 2026-04-20 11:26:48,485 basehttp 3116 16156 "GET /loans/credit-score/ HTTP/1.1" 200 12506
+ERROR 2026-04-20 11:26:51,287 log 3116 16156 Internal Server Error: /profile/
+Traceback (most recent call last):
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\USER\Desktop\Finally Year\client\openbanking_marketplace\apps\accounts\views.py", line 138, in profile_view
+    return render(request, 'accounts/profile.html', context)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\USER\anaconda3\envs\exhibit-2\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: accounts/profile.html
+ERROR 2026-04-20 11:26:51,301 basehttp 3116 16156 "GET /profile/ HTTP/1.1" 500 97948
+INFO 2026-04-20 11:26:53,966 basehttp 3116 16156 "GET /settings/ HTTP/1.1" 200 10116
+INFO 2026-04-20 11:26:55,541 basehttp 3116 16156 "GET /notifications/ HTTP/1.1" 200 10225
+INFO 2026-04-20 11:26:58,508 basehttp 3116 16156 "GET /marketplace/dashboard/ HTTP/1.1" 200 15093
+INFO 2026-04-23 11:18:25,484 autoreload 7200 14772 Watching for file changes with StatReloader
+INFO 2026-04-23 11:18:34,783 basehttp 7200 15264 "GET / HTTP/1.1" 200 12871
+INFO 2026-04-23 11:18:34,816 basehttp 7200 15264 "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2026-04-23 11:18:34,822 basehttp 7200 15264 "GET /static/js/main.js HTTP/1.1" 304 0
+WARNING 2026-04-23 11:18:35,346 log 7200 15264 Not Found: /favicon.ico
+WARNING 2026-04-23 11:18:35,346 basehttp 7200 15264 "GET /favicon.ico HTTP/1.1" 404 4322
+INFO 2026-04-23 11:18:46,636 basehttp 7200 11556 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-04-23 11:18:57,051 basehttp 7200 11556 "GET /register/ HTTP/1.1" 200 9539
+INFO 2026-04-23 11:19:33,715 basehttp 7200 11556 "POST /register/ HTTP/1.1" 302 0
+INFO 2026-04-23 11:19:33,735 basehttp 7200 11556 "GET /login/ HTTP/1.1" 200 6977
+INFO 2026-04-23 11:19:42,294 basehttp 7200 11556 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-04-23 11:19:42,454 basehttp 7200 11556 "GET /marketplace/dashboard/ HTTP/1.1" 200 13730
+INFO 2026-04-23 11:19:51,170 basehttp 7200 11556 "GET /loans/apply/7c75a710-0b9c-4041-bf6b-46abbb668b94/ HTTP/1.1" 200 15057
+INFO 2026-04-23 11:19:51,285 basehttp 7200 11556 "POST /loans/ajax/calculate/ HTTP/1.1" 200 112
+INFO 2026-04-23 11:20:18,133 basehttp 7200 11556 "POST /loans/apply/7c75a710-0b9c-4041-bf6b-46abbb668b94/ HTTP/1.1" 302 0
+INFO 2026-04-23 11:20:18,251 basehttp 7200 11556 "GET /loans/applications/0a95a53a-aed6-4bd9-b5bf-078f71027ae0/ HTTP/1.1" 200 13719
+INFO 2026-04-23 11:20:26,766 basehttp 7200 11556 "GET /banking/accounts/ HTTP/1.1" 200 8696
+INFO 2026-04-23 11:20:30,400 basehttp 7200 11556 "GET /banking/accounts/link/ HTTP/1.1" 200 14983
+INFO 2026-04-23 11:20:43,631 basehttp 7200 11556 "POST /banking/accounts/link/ HTTP/1.1" 302 0
+INFO 2026-04-23 11:20:43,698 basehttp 7200 11556 "GET /banking/accounts/ HTTP/1.1" 200 11721
+INFO 2026-04-23 11:20:49,916 basehttp 7200 11556 "GET /loans/my-applications/ HTTP/1.1" 200 9293
+INFO 2026-04-23 11:20:52,549 basehttp 7200 11556 "GET /loans/apply/ HTTP/1.1" 200 14827
+INFO 2026-04-23 11:20:52,650 basehttp 7200 11556 "POST /loans/ajax/calculate/ HTTP/1.1" 200 108
+INFO 2026-04-23 11:20:55,650 basehttp 7200 11556 "GET /loans/products/ HTTP/1.1" 200 11262
+INFO 2026-04-23 11:21:03,616 basehttp 7200 11556 "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-04-23 11:21:03,632 basehttp 7200 11556 "GET /login/ HTTP/1.1" 200 6976
+INFO 2026-04-23 11:21:14,091 basehttp 7200 11556 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-04-23 11:21:14,281 basehttp 7200 11556 "GET /marketplace/dashboard/ HTTP/1.1" 200 14907
+INFO 2026-04-23 11:21:19,132 basehttp 7200 11556 "GET /loans/lender/applications/0a95a53a-aed6-4bd9-b5bf-078f71027ae0/review/ HTTP/1.1" 200 12950
+INFO 2026-04-23 11:21:23,699 basehttp 7200 11556 "POST /loans/lender/applications/0a95a53a-aed6-4bd9-b5bf-078f71027ae0/review/ HTTP/1.1" 302 0
+INFO 2026-04-23 11:21:23,831 basehttp 7200 11556 "GET /loans/lender/applications/ HTTP/1.1" 200 14559
+INFO 2026-04-23 11:21:29,831 basehttp 7200 11556 "GET /logout/ HTTP/1.1" 302 0
+INFO 2026-04-23 11:21:29,850 basehttp 7200 11556 "GET /login/ HTTP/1.1" 200 6976
+INFO 2026-04-23 11:21:44,545 basehttp 7200 11556 "POST /login/ HTTP/1.1" 302 0
+INFO 2026-04-23 11:21:44,648 basehttp 7200 11556 "GET /marketplace/dashboard/ HTTP/1.1" 200 15602
+INFO 2026-04-23 11:21:45,930 basehttp 7200 11556 "GET /notifications/ HTTP/1.1" 200 10525
+INFO 2026-04-23 11:21:49,890 basehttp 7200 11556 "GET /loans/applications/0a95a53a-aed6-4bd9-b5bf-078f71027ae0/ HTTP/1.1" 200 13773
+INFO 2026-04-23 11:21:52,382 basehttp 7200 11556 "GET /loans/apply/ HTTP/1.1" 200 15480
+INFO 2026-04-23 11:21:52,479 basehttp 7200 11556 "POST /loans/ajax/calculate/ HTTP/1.1" 200 108
+INFO 2026-04-23 11:21:53,404 basehttp 7200 11556 "GET /loans/products/ HTTP/1.1" 200 11915
+INFO 2026-04-23 11:22:05,684 basehttp 7200 11556 "GET /loans/my-applications/ HTTP/1.1" 200 9930
+INFO 2026-04-23 11:22:07,864 basehttp 7200 11556 "GET /loans/applications/0a95a53a-aed6-4bd9-b5bf-078f71027ae0/ HTTP/1.1" 200 13773
+INFO 2026-05-14 20:18:05,269 autoreload 12356 16008 Watching for file changes with StatReloader
+INFO 2026-05-14 20:19:32,430 autoreload 15744 5732 Watching for file changes with StatReloader
+INFO 2026-05-14 20:32:44,997 autoreload 7248 15492 Watching for file changes with StatReloader
+INFO 2026-05-14 20:32:53,514 log 7248 15124 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:32:53,652 log 7248 15124 "GET /static/css/style.css HTTP/1.1" 304 0
+INFO 2026-05-14 20:32:53,668 log 7248 8684 "GET /static/js/main.js HTTP/1.1" 304 0
+WARNING 2026-05-14 20:32:55,646 log 7248 8684 Not Found: /favicon.ico
+WARNING 2026-05-14 20:32:55,647 log 7248 8684 "GET /favicon.ico HTTP/1.1" 404 5409
+INFO 2026-05-14 20:32:59,185 log 7248 8684 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:33:00,585 log 7248 8684 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:33:00,722 log 7248 8684 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:33:00,872 log 7248 8684 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:33:01,028 log 7248 8684 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:33:01,208 log 7248 8684 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:33:01,357 log 7248 8684 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:33:01,598 log 7248 8684 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:33:04,553 log 7248 8684 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:35:51,159 autoreload 10032 3416 Watching for file changes with StatReloader
+INFO 2026-05-14 20:35:56,046 log 10032 6024 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:35:58,534 log 10032 6024 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:35:58,670 log 10032 6024 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:36:06,884 autoreload 7920 13616 Watching for file changes with StatReloader
+INFO 2026-05-14 20:36:12,514 log 7920 4872 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:38:56,845 autoreload 13420 8308 Watching for file changes with StatReloader
+INFO 2026-05-14 20:39:04,861 basehttp 13420 9340 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:39:06,753 basehttp 13420 9340 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:39:07,002 basehttp 13420 9340 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:39:07,135 basehttp 13420 9340 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:39:07,244 basehttp 13420 9340 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:39:07,350 basehttp 13420 9340 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:40:46,304 autoreload 5584 6304 Watching for file changes with StatReloader
+INFO 2026-05-14 20:40:54,145 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:40:55,916 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:40:56,339 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:40:56,511 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:40:56,709 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:40:56,824 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:40:56,938 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:40:57,047 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:43:09,236 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:43:31,708 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:43:31,929 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:43:32,124 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:43:32,245 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:43:32,343 log 5584 3448 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:44:46,497 autoreload 4204 10624 Watching for file changes with StatReloader
+INFO 2026-05-14 20:45:25,525 log 4204 12620 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:45:29,267 log 4204 12620 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:18,058 autoreload 8084 5596 Watching for file changes with StatReloader
+INFO 2026-05-14 20:48:20,451 log 8084 8456 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:21,100 log 8084 8456 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:21,265 log 8084 8456 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:21,342 log 8084 8456 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:21,454 log 8084 8456 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:21,588 log 8084 8456 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:21,676 log 8084 8456 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:21,893 log 8084 8456 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:21,990 log 8084 8456 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:22,093 log 8084 8456 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:22,180 log 8084 8456 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:22,303 log 8084 8456 "GET /login/ HTTP/1.1" 200 6425
+INFO 2026-05-14 20:48:33,919 log 8084 8456 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:48:36,217 log 8084 8456 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:48:36,335 log 8084 8456 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:48:36,557 log 8084 8456 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:48:36,929 log 8084 8456 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:48:40,328 log 8084 8456 "GET / HTTP/1.1" 200 12871
+INFO 2026-05-14 20:48:40,619 log 8084 8456 "GET /static/css/style.css HTTP/1.1" 200 43381
+INFO 2026-05-14 20:48:40,833 log 8084 9076 "GET /static/js/main.js HTTP/1.1" 200 7970
+WARNING 2026-05-14 20:48:59,340 log 8084 9076 Not Found: /favicon.ico
+WARNING 2026-05-14 20:48:59,342 log 8084 9076 "GET /favicon.ico HTTP/1.1" 404 5409
+INFO 2026-05-14 20:53:15,286 autoreload 8084 5596 C:\Users\USER\Desktop\Final Year\client\openbanking_marketplace\openbanking_marketplace\settings.py changed, reloading.
+INFO 2026-05-14 20:53:17,843 autoreload 9920 13384 Watching for file changes with StatReloader

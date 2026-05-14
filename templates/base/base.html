@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Open Banking Marketplace - Connect with multiple lenders and find the best loan offers">
+    <title>{% block title %}Open Banking Marketplace{% endblock %}</title>
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="{% if user.is_authenticated %}dashboard-body{% else %}landing-body{% endif %}">
+    
+    {% if user.is_authenticated %}
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>OpenBank</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <span class="nav-label">Main</span>
+                <a href="{% url 'marketplace:dashboard' %}" class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+            
+            {% if user.is_borrower %}
+            <div class="nav-section">
+                <span class="nav-label">Borrowing</span>
+                <a href="{% url 'loans:product_list' %}" class="nav-link {% if 'product' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-search-dollar"></i>
+                    <span>Browse Loans</span>
+                </a>
+                <a href="{% url 'loans:apply' %}" class="nav-link {% if 'apply' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-file-signature"></i>
+                    <span>Apply for Loan</span>
+                </a>
+                <a href="{% url 'loans:my_applications' %}" class="nav-link {% if 'my_applications' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>My Applications</span>
+                </a>
+                <a href="{% url 'loans:credit_score' %}" class="nav-link {% if 'credit_score' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Credit Score</span>
+                </a>
+            </div>
+            {% endif %}
+            
+            {% if user.is_lender %}
+            <div class="nav-section">
+                <span class="nav-label">Lending</span>
+                <a href="{% url 'loans:lender_products' %}" class="nav-link {% if 'lender_products' in request.resolver_match.url_name or 'create_product' in request.resolver_match.url_name or 'edit_product' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-box-open"></i>
+                    <span>My Products</span>
+                </a>
+                <a href="{% url 'loans:incoming_applications' %}" class="nav-link {% if 'incoming_applications' in request.resolver_match.url_name or 'review_application' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-inbox"></i>
+                    <span>Applications</span>
+                    {% if unread_apps > 0 %}
+                    <span class="badge">{{ unread_apps }}</span>
+                    {% endif %}
+                </a>
+            </div>
+            {% endif %}
+            
+            <div class="nav-section">
+                <span class="nav-label">Banking</span>
+                <a href="{% url 'banking:linked_accounts' %}" class="nav-link {% if 'linked_accounts' in request.resolver_match.url_name or 'link_account' in request.resolver_match.url_name or 'account_detail' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-link"></i>
+                    <span>Linked Accounts</span>
+                </a>
+                <a href="{% url 'banking:transactions' %}" class="nav-link {% if 'transactions' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+            </div>
+            
+            {% if user.is_staff %}
+            <div class="nav-section">
+                <span class="nav-label">Administration</span>
+                <a href="{% url 'analytics:overview' %}" class="nav-link {% if 'overview' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="{% url 'admin:index' %}" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Django Admin</span>
+                </a>
+            </div>
+            {% endif %}
+            
+            <div class="nav-section">
+                <span class="nav-label">Account</span>
+                <a href="{% url 'accounts:profile' %}" class="nav-link {% if 'profile' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="{% url 'accounts:settings' %}" class="nav-link {% if 'settings' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="{% url 'notifications:list' %}" class="nav-link {% if 'list' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                    {% if unread_notification_count > 0 %}
+                    <span class="badge">{{ unread_notification_count }}</span>
+                    {% endif %}
+                </a>
+            </div>
+        </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">{% block page_title %}Dashboard{% endblock %}</h1>
+            </div>
+            
+            <div class="header-right">
+                <!-- Search -->
+                <div class="header-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                
+                <!-- Notifications -->
+                <div class="header-notifications dropdown">
+                    <button class="notification-btn" id="notificationDropdown">
+                        <i class="fas fa-bell"></i>
+                        {% if unread_notification_count > 0 %}
+                        <span class="notification-badge">{{ unread_notification_count }}</span>
+                        {% endif %}
+                    </button>
+                    <div class="dropdown-menu notification-dropdown">
+                        <div class="dropdown-header">
+                            <h4>Notifications</h4>
+                            <a href="{% url 'notifications:list' %}">View All</a>
+                        </div>
+                        <div class="notification-list">
+                            {% for notif in recent_notifications %}
+                            <div class="notification-item {% if not notif.is_read %}unread{% endif %}">
+                                <div class="notification-icon {{ notif.notification_type }}">
+                                    <i class="fas fa-{% if notif.notification_type == 'loan_approved' %}check-circle{% elif notif.notification_type == 'loan_rejected' %}times-circle{% elif notif.notification_type == 'new_offer' %}gift{% else %}info-circle{% endif %}"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p class="notification-title">{{ notif.title }}</p>
+                                    <p class="notification-text">{{ notif.message|truncatechars:60 }}</p>
+                                    <span class="notification-time">{{ notif.created_at|timesince }} ago</span>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <div class="notification-empty">
+                                <i class="fas fa-bell-slash"></i>
+                                <p>No notifications</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- User Profile -->
+                <div class="header-profile dropdown">
+                    <button class="profile-btn" id="profileDropdown">
+                        {% if user.profile_picture %}
+                        <img src="{{ user.profile_picture.url }}" alt="{{ user.get_full_name }}" class="profile-img">
+                        {% else %}
+                        <div class="profile-avatar">{{ user.first_name|first|upper }}{{ user.last_name|first|upper }}</div>
+                        {% endif %}
+                        <div class="profile-info">
+                            <span class="profile-name">{{ user.get_full_name }}</span>
+                            <span class="profile-role">{{ user.get_role_display }}</span>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu profile-dropdown">
+                        <a href="{% url 'accounts:profile' %}">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="{% url 'accounts:settings' %}">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{% url 'accounts:logout' %}" class="logout-link">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Page Content -->
+        <main class="main-content">
+            {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible">
+                    <div class="alert-content">
+                        <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% elif message.tags == 'warning' %}exclamation-triangle{% else %}info-circle{% endif %}"></i>
+                        <span>{{ message }}</span>
+                    </div>
+                    <button type="button" class="alert-close" onclick="this.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            {% block content %}{% endblock %}
+        </main>
+        
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; {% now "Y" %} Open Banking Marketplace. All rights reserved.</p>
+            <p>Designed and Implemented by ILOEGBUNAM VALERIAN CHIMDINDU</p>
+        </footer>
+    </div>
+    
+    <!-- Mobile Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    {% else %}
+    <!-- Landing Page Navigation -->
+    <nav class="landing-nav">
+        <div class="nav-container">
+            <a href="{% url 'accounts:landing' %}" class="logo">
+                <i class="fas fa-university"></i>
+                <span>OpenBank</span>
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'accounts:landing' %}#features">Features</a>
+                <a href="{% url 'accounts:landing' %}#how-it-works">How It Works</a>
+                <a href="{% url 'loans:product_list' %}">Browse Loans</a>
+            </div>
+            <div class="nav-auth">
+                <a href="{% url 'accounts:login' %}" class="btn btn-outline">Sign In</a>
+                <a href="{% url 'accounts:register' %}" class="btn btn-primary">Get Started</a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <main>
+        {% if messages %}
+        <div class="messages-container container">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible">
+                <div class="alert-content">
+                    <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% elif message.tags == 'warning' %}exclamation-triangle{% else %}info-circle{% endif %}"></i>
+                    <span>{{ message }}</span>
+                </div>
+                <button type="button" class="alert-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% block landing_content %}{% endblock %}
+    </main>
+    
+    <footer class="landing-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <i class="fas fa-university"></i>
+                        <span>OpenBank</span>
+                    </div>
+                    <p>Connecting borrowers with multiple lenders through secure Open Banking APIs for better loan access.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="{% url 'accounts:register' %}">Get Started</a>
+                    <a href="{% url 'loans:product_list' %}">Browse Loans</a>
+                    <a href="{% url 'accounts:login' %}">Sign In</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} Open Banking Marketplace. All rights reserved.</p>
+                <p>Designed and Implemented by ILOEGBUNAM VALERIAN CHIMDINDU - Veritas University, Abuja</p>
+            </div>
+        </div>
+    </footer>
+    {% endif %}
+    
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

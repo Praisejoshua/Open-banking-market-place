@@ -1,0 +1,93 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+{% block title %}Linked Accounts - Open Banking Marketplace{% endblock %}
+{% block page_title %}Linked Bank Accounts{% endblock %}
+
+{% block content %}
+<div class="section-header-flex">
+    <h2><i class="fas fa-university"></i> Connected Accounts</h2>
+    <a href="{% url 'banking:link_account' %}" class="btn btn-primary btn-sm">
+        <i class="fas fa-plus"></i> Link Account
+    </a>
+</div>
+
+<!-- Total Balance Card -->
+<div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-bottom: 24px;">
+    <div class="stat-card" style="background: linear-gradient(135deg, var(--primary), var(--accent-purple)); color: white;">
+        <div class="stat-header">
+            <div class="stat-icon" style="background: rgba(255,255,255,0.2); color: white;"><i class="fas fa-wallet"></i></div>
+        </div>
+        <div class="stat-value" style="color: white;">N{{ total_balance|floatformat:0|intcomma }}</div>
+        <div class="stat-label" style="color: rgba(255,255,255,0.8);">Total Balance</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-header"><div class="stat-icon blue"><i class="fas fa-university"></i></div></div>
+        <div class="stat-value">{{ accounts|length }}</div>
+        <div class="stat-label">Linked Accounts</div>
+    </div>
+</div>
+
+<!-- Accounts Grid -->
+{% if accounts %}
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
+    {% for account in accounts %}
+    <div class="card">
+        <div class="card-body">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 48px; height: 48px; background: var(--primary-50); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.25rem;">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1rem; margin-bottom: 2px;">{{ account.bank_name }}</h4>
+                        <span style="font-size: 0.8125rem; color: var(--gray-500);">{{ account.get_account_type_display }} | {{ account.masked_account_number }}</span>
+                    </div>
+                </div>
+                {% if account.is_primary %}<span class="badge badge-primary"><i class="fas fa-star"></i> Primary</span>{% endif %}
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                <div style="padding: 12px; background: var(--gray-50); border-radius: var(--radius);">
+                    <span style="font-size: 0.75rem; color: var(--gray-500);">Balance</span>
+                    <span style="display: block; font-weight: 700; font-size: 1.125rem;">N{{ account.balance|floatformat:0|intcomma }}</span>
+                </div>
+                <div style="padding: 12px; background: var(--gray-50); border-radius: var(--radius);">
+                    <span style="font-size: 0.75rem; color: var(--gray-500);">Available</span>
+                    <span style="display: block; font-weight: 600;">N{{ account.available_balance|floatformat:0|intcomma }}</span>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="badge badge-{% if account.status == 'linked' %}success{% elif account.status == 'syncing' %}warning{% else %}danger{% endif %}" style="font-size: 0.6875rem;">
+                    <i class="fas fa-{% if account.status == 'linked' %}check{% elif account.status == 'syncing' %}sync fa-spin{% else %}exclamation{% endif %}"></i> {{ account.get_status_display }}
+                </span>
+                <span style="font-size: 0.75rem; color: var(--gray-400);">
+                    {% if account.last_synced_at %}Synced {{ account.last_synced_at|timesince }} ago{% else %}Not synced{% endif %}
+                </span>
+            </div>
+            
+            <div style="display: flex; gap: 8px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-100);">
+                <a href="{% url 'banking:account_detail' account.id %}" class="btn btn-primary btn-sm" style="flex: 1;">
+                    <i class="fas fa-eye"></i> View Transactions
+                </a>
+                <a href="{% url 'banking:disconnect_account' account.id %}" class="btn btn-outline btn-sm" style="color: var(--accent-red);">
+                    <i class="fas fa-unlink"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card">
+    <div class="empty-state">
+        <i class="fas fa-university"></i>
+        <h3>No Linked Accounts</h3>
+        <p>Link your bank accounts to get started with Open Banking features and credit scoring.</p>
+        <a href="{% url 'banking:link_account' %}" class="btn btn-primary btn-lg mt-3">
+            <i class="fas fa-link"></i> Link Your First Account
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

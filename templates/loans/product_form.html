@@ -1,0 +1,130 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+{% block title %}{{ title }} - Open Banking Marketplace{% endblock %}
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <div class="card">
+        <div class="card-header">
+            <h3><i class="fas fa-box-open"></i> {{ title }}</h3>
+        </div>
+        <div class="card-body">
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                
+                <h4 style="margin-bottom: 16px; color: var(--gray-800);">Basic Information</h4>
+                <div class="form-group">
+                    <label>Product Name</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}<div class="field-error">{{ form.name.errors }}</div>{% endif %}
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Loan Type</label>
+                        {{ form.loan_type }}
+                        {% if form.loan_type.errors %}<div class="field-error">{{ form.loan_type.errors }}</div>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        {{ form.status }}
+                        {% if form.status.errors %}<div class="field-error">{{ form.status.errors }}</div>{% endif %}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    {{ form.description }}
+                    {% if form.description.errors %}<div class="field-error">{{ form.description.errors }}</div>{% endif %}
+                </div>
+                
+                <h4 style="margin: 24px 0 16px; color: var(--gray-800);">Loan Terms</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Min Amount (N)</label>
+                        {{ form.min_amount }}
+                        {% if form.min_amount.errors %}<div class="field-error">{{ form.min_amount.errors }}</div>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label>Max Amount (N)</label>
+                        {{ form.max_amount }}
+                        {% if form.max_amount.errors %}<div class="field-error">{{ form.max_amount.errors }}</div>{% endif %}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Min Duration (months)</label>
+                        {{ form.min_duration_months }}
+                    </div>
+                    <div class="form-group">
+                        <label>Max Duration (months)</label>
+                        {{ form.max_duration_months }}
+                    </div>
+                    <div class="form-group">
+                        <label>Interest Rate (%)</label>
+                        {{ form.interest_rate }}
+                    </div>
+                </div>
+                
+                <h4 style="margin: 24px 0 16px; color: var(--gray-800);">Fees</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Processing Fee (%)</label>
+                        {{ form.processing_fee_percent }}
+                    </div>
+                    <div class="form-group">
+                        <label>Late Payment Penalty (%)</label>
+                        {{ form.late_payment_penalty }}
+                    </div>
+                    <div class="form-group">
+                        <label>Early Repayment Penalty (%)</label>
+                        {{ form.early_repayment_penalty }}
+                    </div>
+                </div>
+                
+                <h4 style="margin: 24px 0 16px; color: var(--gray-800);">Eligibility Criteria</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Min Credit Score</label>
+                        {{ form.min_credit_score }}
+                    </div>
+                    <div class="form-group">
+                        <label>Min Annual Income (N)</label>
+                        {{ form.min_annual_income }}
+                    </div>
+                    <div class="form-group">
+                        <label>Max DTI Ratio (%)</label>
+                        {{ form.max_debt_to_income_ratio }}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        {{ form.requires_collateral }}
+                        <span class="checkmark"></span>
+                        Requires Collateral
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Collateral Description</label>
+                    {{ form.collateral_description }}
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        {{ form.is_featured }}
+                        <span class="checkmark"></span>
+                        Feature on Homepage
+                    </label>
+                </div>
+                
+                <div style="display: flex; gap: 12px; margin-top: 24px;">
+                    <button type="submit" class="btn btn-primary btn-lg" style="flex: 1;">
+                        <i class="fas fa-save"></i> Save Product
+                    </button>
+                    <a href="{% url 'loans:lender_products' %}" class="btn btn-outline btn-lg">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

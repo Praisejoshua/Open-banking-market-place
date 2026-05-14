@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% load humanize %}
+{% block title %}Disconnect Account - Open Banking Marketplace{% endblock %}
+{% block page_title %}Disconnect Account{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 0 auto;">
+    <div class="card">
+        <div class="card-body" style="text-align: center; padding: 40px;">
+            <div style="width: 80px; height: 80px; background: var(--accent-red-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: var(--accent-red); font-size: 2rem;">
+                <i class="fas fa-unlink"></i>
+            </div>
+            <h3 style="margin-bottom: 8px;">Disconnect Account?</h3>
+            <p style="color: var(--gray-500); margin-bottom: 24px;">
+                You are about to disconnect your <strong>{{ account.bank_name }}</strong> account ending in <strong>{{ account.masked_account_number }}</strong>. This action cannot be undone.
+            </p>
+            <form method="post" style="display: flex; gap: 12px; justify-content: center;">
+                {% csrf_token %}
+                <a href="{% url 'banking:linked_accounts' %}" class="btn btn-outline btn-lg">Cancel</a>
+                <button type="submit" class="btn btn-danger btn-lg">
+                    <i class="fas fa-unlink"></i> Disconnect
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
