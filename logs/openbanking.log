@@ -2173,3 +2173,5 @@ WARNING 2026-05-14 20:48:59,340 log 8084 9076 Not Found: /favicon.ico
 WARNING 2026-05-14 20:48:59,342 log 8084 9076 "GET /favicon.ico HTTP/1.1" 404 5409
 INFO 2026-05-14 20:53:15,286 autoreload 8084 5596 C:\Users\USER\Desktop\Final Year\client\openbanking_marketplace\openbanking_marketplace\settings.py changed, reloading.
 INFO 2026-05-14 20:53:17,843 autoreload 9920 13384 Watching for file changes with StatReloader
+INFO 2026-05-14 21:16:26,107 autoreload 6432 8824 Watching for file changes with StatReloader
+INFO 2026-05-14 21:18:04,129 autoreload 15520 1376 Watching for file changes with StatReloader
